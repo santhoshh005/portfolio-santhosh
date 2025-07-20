@@ -53,13 +53,13 @@ const HeroSection = () => {
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-accent transition-smooth transform hover:scale-110">
               <Github size={24} />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-accent transition-smooth transform hover:scale-110">
+            <a href="https://www.linkedin.com/in/sai-santhosh-07603828b" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-accent transition-smooth transform hover:scale-110">
               <Linkedin size={24} />
             </a>
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-accent transition-smooth transform hover:scale-110">
               <Instagram size={24} />
             </a>
-            <a href="mailto:your.email@example.com" className="text-white/70 hover:text-accent transition-smooth transform hover:scale-110">
+            <a href="mailto:saisanthosh05012006@gmail.com" className="text-white/70 hover:text-accent transition-smooth transform hover:scale-110">
               <Mail size={24} />
             </a>
           </div>

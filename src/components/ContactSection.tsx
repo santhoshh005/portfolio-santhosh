@@ -42,26 +42,26 @@ const ContactSection = () => {
     {
       icon: <Mail className="w-5 h-5" />,
       label: "Email",
-      value: "your.email@example.com",
-      link: "mailto:your.email@example.com"
+      value: "saisanthosh05012006@gmail.com",
+      link: "mailto:saisanthosh05012006@gmail.com"
     },
     {
       icon: <Phone className="w-5 h-5" />,
       label: "Phone",
-      value: "+1 (555) 123-4567",
-      link: "tel:+15551234567"
+      value: "+91 7569532243",
+      link: "tel:+917569532243"
     },
     {
       icon: <MapPin className="w-5 h-5" />,
       label: "Location",
-      value: "Your City, Country",
+      value: "Anantapur, Andhra Pradesh",
       link: null
     },
     {
       icon: <Linkedin className="w-5 h-5" />,
       label: "LinkedIn",
-      value: "linkedin.com/in/yourprofile",
-      link: "https://linkedin.com/in/yourprofile"
+      value: "linkedin.com/in/sai-santhosh-07603828b",
+      link: "https://www.linkedin.com/in/sai-santhosh-07603828b"
     }
   ];
 
@@ -117,7 +117,7 @@ const ContactSection = () => {
                      className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-smooth">
                     <Github className="w-5 h-5" />
                   </a>
-                  <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer"
+                  <a href="https://www.linkedin.com/in/sai-santhosh-07603828b" target="_blank" rel="noopener noreferrer"
                      className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-smooth">
                     <Linkedin className="w-5 h-5" />
                   </a>
@@ -125,7 +125,7 @@ const ContactSection = () => {
                      className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-smooth">
                     <Instagram className="w-5 h-5" />
                   </a>
-                  <a href="mailto:your.email@example.com"
+                  <a href="mailto:saisanthosh05012006@gmail.com"
                      className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-smooth">
                     <Mail className="w-5 h-5" />
                   </a>
