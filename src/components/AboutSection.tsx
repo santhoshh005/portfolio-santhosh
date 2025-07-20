@@ -1,32 +1,24 @@
 import { GraduationCap, Code, Target, Heart } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
-
 const AboutSection = () => {
-  const highlights = [
-    {
-      icon: <GraduationCap className="w-6 h-6 text-accent" />,
-      title: "Education",
-      description: "Computer Science & Engineering student with a passion for learning and innovation."
-    },
-    {
-      icon: <Code className="w-6 h-6 text-accent" />,
-      title: "Development",
-      description: "Full-stack developer with experience in modern web technologies and frameworks."
-    },
-    {
-      icon: <Target className="w-6 h-6 text-accent" />,
-      title: "Goals",
-      description: "Aiming to create impactful software solutions that solve real-world problems."
-    },
-    {
-      icon: <Heart className="w-6 h-6 text-accent" />,
-      title: "Passion",
-      description: "Driven by curiosity and the desire to continuously grow and improve."
-    }
-  ];
-
-  return (
-    <section id="about" className="py-20 bg-secondary">
+  const highlights = [{
+    icon: <GraduationCap className="w-6 h-6 text-accent" />,
+    title: "Education",
+    description: "Computer Science & Engineering student with a passion for learning and innovation."
+  }, {
+    icon: <Code className="w-6 h-6 text-accent" />,
+    title: "Development",
+    description: "Full-stack developer with experience in modern web technologies and frameworks."
+  }, {
+    icon: <Target className="w-6 h-6 text-accent" />,
+    title: "Goals",
+    description: "Aiming to create impactful software solutions that solve real-world problems."
+  }, {
+    icon: <Heart className="w-6 h-6 text-accent" />,
+    title: "Passion",
+    description: "Driven by curiosity and the desire to continuously grow and improve."
+  }];
+  return <section id="about" className="py-20 bg-secondary">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -65,8 +57,7 @@ const AboutSection = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {highlights.map((item, index) => (
-                <Card key={index} className="shadow-card hover:shadow-elegant transition-smooth transform hover:-translate-y-1">
+              {highlights.map((item, index) => <Card key={index} className="shadow-card hover:shadow-elegant transition-smooth transform hover:-translate-y-1">
                   <CardContent className="p-6 text-center">
                     <div className="inline-flex items-center justify-center w-12 h-12 bg-accent/10 rounded-lg mb-4">
                       {item.icon}
@@ -74,34 +65,14 @@ const AboutSection = () => {
                     <h4 className="font-semibold text-primary mb-2">{item.title}</h4>
                     <p className="text-sm text-muted-foreground">{item.description}</p>
                   </CardContent>
-                </Card>
-              ))}
+                </Card>)}
             </div>
           </div>
 
           {/* Personal Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-3xl font-bold text-accent mb-2">20+</div>
-              <div className="text-sm text-muted-foreground">Projects Completed</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-accent mb-2">5+</div>
-              <div className="text-sm text-muted-foreground">Technologies Mastered</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-accent mb-2">3.8</div>
-              <div className="text-sm text-muted-foreground">Current GPA</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-accent mb-2">2+</div>
-              <div className="text-sm text-muted-foreground">Years Experience</div>
-            </div>
-          </div>
+          
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default AboutSection;
