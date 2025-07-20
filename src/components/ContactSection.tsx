@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Linkedin, Github, MapPin, Phone, Send } from 'lucide-react';
+import { Mail, Linkedin, Github, MapPin, Phone, Send, Instagram } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -120,6 +120,10 @@ const ContactSection = () => {
                   <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer"
                      className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-smooth">
                     <Linkedin className="w-5 h-5" />
+                  </a>
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+                     className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-smooth">
+                    <Instagram className="w-5 h-5" />
                   </a>
                   <a href="mailto:your.email@example.com"
                      className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-smooth">
