@@ -1,4 +1,4 @@
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail, Instagram } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import heroImage from '@/assets/hero-image.jpg';
 const HeroSection = () => {
@@ -55,6 +55,9 @@ const HeroSection = () => {
             </a>
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-accent transition-smooth transform hover:scale-110">
               <Linkedin size={24} />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-accent transition-smooth transform hover:scale-110">
+              <Instagram size={24} />
             </a>
             <a href="mailto:your.email@example.com" className="text-white/70 hover:text-accent transition-smooth transform hover:scale-110">
               <Mail size={24} />
