@@ -31,7 +31,7 @@ const Footer = () => {
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             {/* Brand & Description */}
             <div className="space-y-4">
-              <h3 className="text-2xl font-bold">Your Name</h3>
+              <h3 className="text-2xl font-bold">Santhosh</h3>
               <p className="text-primary-foreground/80 leading-relaxed">
                 Software Developer & CSE Student passionate about creating 
                 innovative solutions and building meaningful digital experiences.
@@ -79,7 +79,7 @@ const Footer = () => {
           <div className="border-t border-primary-foreground/20 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
               <div className="flex items-center space-x-2 text-primary-foreground/80">
-                <span>© {currentYear} Your Name. Made with</span>
+                <span>© {currentYear} Santhosh. Made with</span>
                 <Heart className="w-4 h-4 text-red-400 fill-current" />
                 <span>using React & TypeScript</span>
               </div>
