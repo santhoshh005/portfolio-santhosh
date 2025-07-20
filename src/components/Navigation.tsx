@@ -27,12 +27,6 @@ const Navigation = () => {
     label: 'About',
     section: 'about'
   }, {
-    label: 'Skills',
-    section: 'skills'
-  }, {
-    label: 'Projects',
-    section: 'projects'
-  }, {
     label: 'Contact',
     section: 'contact'
   }];
