@@ -42,10 +42,7 @@ const HeroSection = () => {
             Currently pursuing my CSE degree while working on exciting projects that make a difference.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in animate-fade-in-delay-3">
-            <Button size="lg" onClick={() => scrollToSection('projects')} className="bg-accent hover:bg-accent/90 text-white shadow-glow transition-bounce">
-              View My Work
-            </Button>
+          <div className="flex justify-center mb-12 animate-fade-in animate-fade-in-delay-3">
             <Button variant="outline" size="lg" onClick={() => scrollToSection('contact')} className="border-white/30 text-white hover:bg-white/10 transition-smooth">
               Get In Touch
             </Button>
