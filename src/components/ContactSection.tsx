@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import emailjs from '@emailjs/browser';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -23,19 +24,83 @@ const ContactSection = () => {
     });
   };
 
+  const validateForm = () => {
+    if (!formData.name.trim()) {
+      toast({
+        title: "Error",
+        description: "Please enter your name.",
+        variant: "destructive",
+      });
+      return false;
+    }
+    if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
+      toast({
+        title: "Error",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return false;
+    }
+    if (!formData.subject.trim()) {
+      toast({
+        title: "Error",
+        description: "Please enter a subject.",
+        variant: "destructive",
+      });
+      return false;
+    }
+    if (!formData.message.trim()) {
+      toast({
+        title: "Error",
+        description: "Please enter your message.",
+        variant: "destructive",
+      });
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // EmailJS configuration
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_email: 'saisanthosh05012006@gmail.com'
+      };
+
+      // Replace these with your EmailJS credentials
+      const serviceId = 'your_service_id'; // Get from EmailJS dashboard
+      const templateId = 'your_template_id'; // Get from EmailJS dashboard  
+      const publicKey = 'your_public_key'; // Get from EmailJS dashboard
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
       toast({
-        title: "Message Sent!",
+        title: "Message Sent Successfully!",
         description: "Thank you for reaching out. I'll get back to you soon.",
       });
       setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      toast({
+        title: "Failed to Send Message",
+        description: "Please try again or contact me directly at saisanthosh05012006@gmail.com",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   const contactInfo = [
