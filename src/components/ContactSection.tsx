@@ -71,12 +71,12 @@ const ContactSection = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-              Let's Connect
+              📧 Let's Connect
             </h2>
             <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              I'm always interested in discussing new opportunities, collaborations, 
-              or just having a conversation about technology and innovation.
+              💼 I'm always interested in discussing new opportunities, collaborations, 
+              or just having a conversation about technology and innovation. 🤝
             </p>
           </div>
 
@@ -84,7 +84,7 @@ const ContactSection = () => {
             {/* Contact Information */}
             <div className="lg:col-span-1 space-y-6">
               <h3 className="text-2xl font-semibold text-primary mb-6">
-                Get In Touch
+                📞 Get In Touch
               </h3>
               
               <div className="space-y-4">
@@ -111,7 +111,7 @@ const ContactSection = () => {
 
               {/* Social Links */}
               <div className="pt-6 border-t border-border">
-                <h4 className="text-lg font-semibold text-primary mb-4">Follow Me</h4>
+                <h4 className="text-lg font-semibold text-primary mb-4">🌟 Follow Me</h4>
                 <div className="flex space-x-4">
                   <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer"
                      className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-smooth">
@@ -137,7 +137,7 @@ const ContactSection = () => {
             <div className="lg:col-span-2">
               <Card className="shadow-elegant">
                 <CardHeader>
-                  <CardTitle className="text-xl text-primary">Send Me a Message</CardTitle>
+                  <CardTitle className="text-xl text-primary">💌 Send Me a Message</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-6">

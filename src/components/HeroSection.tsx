@@ -30,16 +30,16 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto text-center text-white">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
             Hi, I'm{' '}
-            <span className="bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent"> Santhosh</span>
+            <span className="bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent"> 👋 Santhosh</span>
           </h1>
           
           <p className="text-xl md:text-2xl mb-8 text-gray-200 animate-fade-in animate-fade-in-delay-1">
-            Software Developer & Computer Science Student
+            💻 Software Developer & 🎓 Computer Science Student
           </p>
           
           <p className="text-lg mb-10 text-gray-300 max-w-2xl mx-auto animate-fade-in animate-fade-in-delay-2">
-            Passionate about creating innovative solutions and building scalable applications. 
-            Currently pursuing my CSE degree while working on exciting projects that make a difference.
+            🚀 Passionate about creating innovative solutions and building scalable applications. 
+            Currently pursuing my CSE degree while working on exciting projects that make a difference. ✨
           </p>
 
           <div className="flex justify-center mb-12 animate-fade-in animate-fade-in-delay-3">
