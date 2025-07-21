@@ -31,7 +31,7 @@ const AboutSection = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-              👨‍💻 About Me
+              About Me
             </h2>
             <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">

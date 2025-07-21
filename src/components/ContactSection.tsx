@@ -71,11 +71,11 @@ const ContactSection = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-              📧 Let's Connect
+              Let's Connect
             </h2>
             <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              💼 I'm always interested in discussing new opportunities, collaborations, 
+              I'm always interested in discussing new opportunities, collaborations, 
               or just having a conversation about technology and innovation. 🤝
             </p>
           </div>
@@ -84,7 +84,7 @@ const ContactSection = () => {
             {/* Contact Information */}
             <div className="lg:col-span-1 space-y-6">
               <h3 className="text-2xl font-semibold text-primary mb-6">
-                📞 Get In Touch
+                Get In Touch
               </h3>
               
               <div className="space-y-4">
@@ -137,7 +137,7 @@ const ContactSection = () => {
             <div className="lg:col-span-2">
               <Card className="shadow-elegant">
                 <CardHeader>
-                  <CardTitle className="text-xl text-primary">💌 Send Me a Message</CardTitle>
+                  <CardTitle className="text-xl text-primary">Send Me a Message</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-6">
