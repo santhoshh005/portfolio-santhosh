@@ -131,24 +131,24 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-background">
+    <section id="contact" className="py-16 bg-background">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">
               Let's Connect
             </h2>
-            <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <div className="w-20 h-1 bg-accent mx-auto mb-4"></div>
+            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
               I'm always interested in discussing new opportunities, collaborations, 
               or just having a conversation about technology and innovation. 🤝
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid lg:grid-cols-3 gap-8">
             {/* Contact Information */}
             <div className="lg:col-span-1 space-y-6">
-              <h3 className="text-2xl font-semibold text-primary mb-6">
+              <h3 className="text-xl font-semibold text-primary mb-4">
                 Get In Touch
               </h3>
               

@@ -26,21 +26,21 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-secondary">
+    <section id="about" className="py-16 bg-secondary">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">
               About Me
             </h2>
-            <div className="w-24 h-1 bg-accent mx-auto mb-6"></div>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <div className="w-20 h-1 bg-accent mx-auto mb-4"></div>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               CSE student passionate about creating innovative software solutions. 
               I love turning ideas into reality through clean, efficient code.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {highlights.map((item, index) => (
               <Card 
                 key={index} 

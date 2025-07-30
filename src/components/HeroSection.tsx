@@ -28,28 +28,28 @@ const HeroSection = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center text-white">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">
             Hi, I'm{' '}
             <span className="bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent"> 👋 Santhosh</span>
           </h1>
           
-          <p className="text-xl md:text-2xl mb-8 text-gray-200 animate-fade-in animate-fade-in-delay-1">
+          <p className="text-lg md:text-xl mb-6 text-gray-200 animate-fade-in animate-fade-in-delay-1">
             Software Developer & 🎓 Computer Science Student
           </p>
           
-          <p className="text-lg mb-10 text-gray-300 max-w-2xl mx-auto animate-fade-in animate-fade-in-delay-2">
+          <p className="text-base mb-8 text-gray-300 max-w-2xl mx-auto animate-fade-in animate-fade-in-delay-2">
             🚀 Passionate about creating innovative solutions and building scalable applications. 
             Currently pursuing my CSE degree while working on exciting projects that make a difference.
           </p>
 
-          <div className="flex justify-center mb-12 animate-fade-in animate-fade-in-delay-3">
+          <div className="flex justify-center mb-8 animate-fade-in animate-fade-in-delay-3">
             <Button variant="outline" size="lg" onClick={() => scrollToSection('contact')} className="border-white/30 text-white hover:bg-white/10 transition-smooth">
               Get In Touch
             </Button>
           </div>
 
           {/* Social Links */}
-          <div className="flex justify-center space-x-6 mb-16 animate-fade-in animate-fade-in-delay-3">
+          <div className="flex justify-center space-x-4 mb-12 animate-fade-in animate-fade-in-delay-3">
             <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-accent transition-smooth transform hover:scale-110">
               <Github size={24} />
             </a>
