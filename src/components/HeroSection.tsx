@@ -1,4 +1,4 @@
-import { ArrowDown, Github, Linkedin, Mail, Instagram, FolderGit2, Download } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail, Instagram, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const HeroSection = () => {
@@ -44,20 +44,12 @@ const HeroSection = () => {
             I build privacy-first tools, full-stack apps, and developer-focused experiences.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-10 animate-fade-in animate-fade-in-delay-3">
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10 animate-fade-in animate-fade-in-delay-3">
             <Button
-              size="lg"
-              onClick={() => scrollToSection('projects')}
-              className="bg-accent hover:bg-accent/90 text-white shadow-glow transition-smooth"
-            >
-              <FolderGit2 className="mr-2" />
-              View Projects
-            </Button>
-            <Button
-              variant="outline"
               size="lg"
               asChild
-              className="border-white/40 text-white bg-white/5 hover:bg-white/15 backdrop-blur-sm transition-smooth"
+              className="bg-accent hover:bg-accent/90 text-white shadow-glow hover:shadow-glow-lg transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 min-w-[180px]"
             >
               <a href="/resume.pdf" download>
                 <Download className="mr-2" />
@@ -65,10 +57,10 @@ const HeroSection = () => {
               </a>
             </Button>
             <Button
-              variant="ghost"
+              variant="outline"
               size="lg"
               onClick={() => scrollToSection('contact')}
-              className="text-white hover:bg-white/10 transition-smooth"
+              className="border-white/50 text-white bg-white/5 hover:bg-white/15 hover:border-white/70 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 min-w-[180px]"
             >
               Get In Touch
             </Button>
