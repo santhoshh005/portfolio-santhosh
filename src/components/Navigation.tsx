@@ -20,16 +20,12 @@ const Navigation = () => {
       setIsMobileMenuOpen(false);
     }
   };
-  const navItems = [{
-    label: 'Home',
-    section: 'hero'
-  }, {
-    label: 'About',
-    section: 'about'
-  }, {
-    label: 'Contact',
-    section: 'contact'
-  }];
+  const navItems = [
+    { label: 'Home', section: 'hero' },
+    { label: 'About', section: 'about' },
+    { label: 'Projects', section: 'projects' },
+    { label: 'Contact', section: 'contact' },
+  ];
   return <nav className={`fixed top-0 w-full z-50 transition-smooth ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-card border-b border-border' : 'bg-transparent'}`}>
       <div className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">

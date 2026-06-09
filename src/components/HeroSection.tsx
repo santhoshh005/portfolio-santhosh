@@ -1,75 +1,128 @@
-import { ArrowDown, Github, Linkedin, Mail, Instagram } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail, Instagram, FolderGit2, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import heroImage from '@/assets/hero-image.jpg';
+
 const HeroSection = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth'
-      });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
-  return <section id="hero" className="min-h-screen flex items-center relative overflow-hidden">
-      {/* Background with gradient overlay */}
+
+  return (
+    <section id="hero" className="min-h-screen flex items-center relative overflow-hidden">
+      {/* Animated gradient background */}
       <div className="absolute inset-0 gradient-hero">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <img src={heroImage} alt="Professional workspace" className="w-full h-full object-cover mix-blend-overlay opacity-30" />
+        <div className="absolute inset-0 bg-black/30"></div>
       </div>
 
-      {/* Floating geometric shapes */}
-      <div className="absolute top-20 left-10 w-20 h-20 border border-white/20 rounded-lg animate-float opacity-50"></div>
-      <div className="absolute bottom-40 right-20 w-16 h-16 bg-accent/20 rounded-full animate-float" style={{
-      animationDelay: '2s'
-    }}></div>
-      <div className="absolute top-1/3 right-1/4 w-12 h-12 border-2 border-accent/30 rotate-45 animate-float" style={{
-      animationDelay: '4s'
-    }}></div>
+      {/* Subtle animated glow orbs */}
+      <div className="absolute top-1/4 -left-20 w-72 h-72 bg-accent/30 rounded-full blur-3xl animate-float opacity-60"></div>
+      <div
+        className="absolute bottom-1/4 -right-20 w-80 h-80 bg-blue-400/20 rounded-full blur-3xl animate-float opacity-60"
+        style={{ animationDelay: '3s' }}
+      ></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center text-white">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">
-            Hi, I'm{' '}
-            <span className="bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent"> 👋 Santhosh</span>
-          </h1>
-          
-          <p className="text-lg md:text-xl mb-6 text-gray-200 animate-fade-in animate-fade-in-delay-1">
-            Software Developer & 🎓 Computer Science Student
+          <p className="text-sm md:text-base uppercase tracking-[0.3em] text-accent-foreground/80 mb-4 animate-fade-in">
+            Welcome to my portfolio
           </p>
-          
-          <p className="text-base mb-8 text-gray-300 max-w-2xl mx-auto animate-fade-in animate-fade-in-delay-2">
-            🚀 Passionate about creating innovative solutions and building scalable applications. 
-            Currently pursuing my CSE degree while working on exciting projects that make a difference.
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-5 animate-fade-in leading-tight">
+            Hi, I'm{' '}
+            <span className="bg-gradient-to-r from-accent to-blue-300 bg-clip-text text-transparent">
+              Santhosh
+            </span>
+          </h1>
+
+          <p className="text-lg md:text-2xl mb-5 text-gray-200 animate-fade-in animate-fade-in-delay-1 font-light">
+            Software Developer &amp; Computer Science Student
           </p>
 
-          <div className="flex justify-center mb-8 animate-fade-in animate-fade-in-delay-3">
-            <Button variant="outline" size="lg" onClick={() => scrollToSection('contact')} className="border-white/30 text-white hover:bg-white/10 transition-smooth">
+          <p className="text-base md:text-lg mb-10 text-gray-300 max-w-2xl mx-auto animate-fade-in animate-fade-in-delay-2 leading-relaxed">
+            Passionate about crafting clean, scalable, and meaningful software.
+            I build privacy-first tools, full-stack apps, and developer-focused experiences.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-10 animate-fade-in animate-fade-in-delay-3">
+            <Button
+              size="lg"
+              onClick={() => scrollToSection('projects')}
+              className="bg-accent hover:bg-accent/90 text-white shadow-glow transition-smooth"
+            >
+              <FolderGit2 className="mr-2" />
+              View Projects
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              asChild
+              className="border-white/40 text-white bg-white/5 hover:bg-white/15 backdrop-blur-sm transition-smooth"
+            >
+              <a href="/resume.pdf" download>
+                <Download className="mr-2" />
+                Download Resume
+              </a>
+            </Button>
+            <Button
+              variant="ghost"
+              size="lg"
+              onClick={() => scrollToSection('contact')}
+              className="text-white hover:bg-white/10 transition-smooth"
+            >
               Get In Touch
             </Button>
           </div>
 
           {/* Social Links */}
-          <div className="flex justify-center space-x-4 mb-12 animate-fade-in animate-fade-in-delay-3">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-accent transition-smooth transform hover:scale-110">
-              <Github size={24} />
+          <div className="flex justify-center space-x-5 mb-12 animate-fade-in animate-fade-in-delay-3">
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="text-white/70 hover:text-accent transition-smooth hover-scale"
+            >
+              <Github size={22} />
             </a>
-            <a href="https://www.linkedin.com/in/sai-santhosh-07603828b" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-accent transition-smooth transform hover:scale-110">
-              <Linkedin size={24} />
+            <a
+              href="https://www.linkedin.com/in/sai-santhosh-07603828b"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="text-white/70 hover:text-accent transition-smooth hover-scale"
+            >
+              <Linkedin size={22} />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-accent transition-smooth transform hover:scale-110">
-              <Instagram size={24} />
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="text-white/70 hover:text-accent transition-smooth hover-scale"
+            >
+              <Instagram size={22} />
             </a>
-            <a href="mailto:saisanthosh05012006@gmail.com" className="text-white/70 hover:text-accent transition-smooth transform hover:scale-110">
-              <Mail size={24} />
+            <a
+              href="mailto:saisanthosh05012006@gmail.com"
+              aria-label="Email"
+              className="text-white/70 hover:text-accent transition-smooth hover-scale"
+            >
+              <Mail size={22} />
             </a>
           </div>
 
-          {/* Scroll indicator */}
-          <button onClick={() => scrollToSection('about')} className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/70 hover:text-accent transition-smooth animate-bounce">
+          <button
+            onClick={() => scrollToSection('about')}
+            aria-label="Scroll to About"
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/70 hover:text-accent transition-smooth animate-bounce"
+          >
             <ArrowDown size={24} />
           </button>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default HeroSection;
