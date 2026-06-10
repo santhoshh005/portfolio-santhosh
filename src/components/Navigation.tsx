@@ -1,12 +1,27 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, MoonStar, SunMedium, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { useTheme } from 'next-themes';
+
+const navItems = [
+  { label: 'Home', section: 'hero' },
+  { label: 'About', section: 'about' },
+  { label: 'Skills', section: 'skills' },
+  { label: 'Projects', section: 'projects' },
+  { label: 'Contact', section: 'contact' },
+];
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [mounted, setMounted] = useState(false);
+  const { theme, resolvedTheme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,16 +64,12 @@ const Navigation = () => {
     }
   };
 
-  const navItems = [
-    { label: 'Home', section: 'hero' },
-    { label: 'About', section: 'about' },
-    { label: 'Skills', section: 'skills' },
-    { label: 'Projects', section: 'projects' },
-    { label: 'Contact', section: 'contact' },
-  ];
+  const currentTheme = resolvedTheme ?? theme;
+  const isDarkMode = currentTheme === 'dark';
 
   return (
     <nav
+      aria-label="Primary navigation"
       className={cn(
         'fixed top-0 w-full z-50 transition-all duration-300',
         isScrolled
@@ -66,23 +77,25 @@ const Navigation = () => {
           : 'bg-transparent'
       )}
     >
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex justify-between items-center">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 sm:h-20">
+        <div className="grid h-full grid-cols-[1fr_auto_1fr] items-center gap-4">
           <button
             onClick={() => scrollToSection('hero')}
-            className="text-2xl font-bold text-primary hover:text-accent transition-colors duration-300"
+            aria-label="Go to home section"
+            className="justify-self-start whitespace-nowrap text-xl sm:text-2xl font-bold text-primary hover:text-accent transition-colors duration-300"
           >
             Santhosh
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center justify-center gap-1 justify-self-center">
             {navItems.map((item) => (
               <button
                 key={item.section}
                 onClick={() => scrollToSection(item.section)}
+                aria-current={activeSection === item.section ? 'page' : undefined}
                 className={cn(
-                  'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300',
+                  'inline-flex h-10 items-center px-4 rounded-lg text-sm font-medium transition-all duration-300',
                   activeSection === item.section
                     ? 'text-accent bg-accent/10'
                     : 'text-foreground hover:text-accent hover:bg-accent/5'
@@ -93,27 +106,47 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="md:hidden hover:bg-accent/10"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X /> : <Menu />}
-          </Button>
+          <div className="flex items-center justify-end gap-2 justify-self-end">
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="hidden md:inline-flex h-10 w-10 hover:bg-accent/10"
+              onClick={() => setTheme(isDarkMode ? 'light' : 'dark')}
+              aria-label={mounted ? `Switch to ${isDarkMode ? 'light' : 'dark'} mode` : 'Toggle theme'}
+            >
+              {mounted ? (isDarkMode ? <SunMedium /> : <MoonStar />) : <MoonStar />}
+            </Button>
+
+            {/* Mobile Menu Button */}
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="md:hidden h-10 w-10 hover:bg-accent/10"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X /> : <Menu />}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 space-y-1 animate-fade-in border-t border-border/50 pt-4">
+          <div
+            id="mobile-navigation"
+            className="md:hidden mt-3 rounded-2xl border border-border/60 bg-background/95 p-2 shadow-elegant backdrop-blur-xl animate-fade-in"
+          >
             {navItems.map((item) => (
               <button
                 key={item.section}
                 onClick={() => scrollToSection(item.section)}
+                aria-current={activeSection === item.section ? 'page' : undefined}
                 className={cn(
-                  'block w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-300',
+                  'block w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300',
                   activeSection === item.section
                     ? 'text-accent bg-accent/10'
                     : 'text-foreground hover:text-accent hover:bg-accent/5'

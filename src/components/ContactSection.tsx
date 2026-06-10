@@ -1,68 +1,101 @@
-import { useState } from 'react';
-import { Mail, Linkedin, Github, MapPin, Phone, Send, Instagram } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useMemo, useState } from 'react';
+import { Github, Instagram, Linkedin, Mail, Send } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import emailjs from '@emailjs/browser';
+
+const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL ?? 'saisanthosh05012006@gmail.com';
+const CONTACT_PHONE = import.meta.env.VITE_CONTACT_PHONE ?? '+91 7569532243';
+const EMAILJS_CONFIG = {
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+};
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const MIN_MESSAGE_LENGTH = 10;
+const SUBMIT_COOLDOWN_MS = 30_000;
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    company: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [lastSubmittedAt, setLastSubmittedAt] = useState(0);
   const { toast } = useToast();
 
+  const emailServiceReady = useMemo(
+    () => Boolean(EMAILJS_CONFIG.serviceId && EMAILJS_CONFIG.templateId && EMAILJS_CONFIG.publicKey),
+    []
+  );
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData((current) => ({
+      ...current,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const validateForm = () => {
-    if (!formData.name.trim()) {
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const subject = formData.subject.trim();
+    const message = formData.message.trim();
+
+    if (formData.company.trim()) {
+      return false;
+    }
+
+    if (name.length < 2 || name.length > 80) {
       toast({
-        title: "Error",
-        description: "Please enter your name.",
-        variant: "destructive",
+        title: 'Error',
+        description: 'Please enter a name between 2 and 80 characters.',
+        variant: 'destructive',
       });
       return false;
     }
-    if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
+
+    if (!EMAIL_PATTERN.test(email) || email.length > 120) {
       toast({
-        title: "Error",
-        description: "Please enter a valid email address.",
-        variant: "destructive",
+        title: 'Error',
+        description: 'Please enter a valid email address.',
+        variant: 'destructive',
       });
       return false;
     }
-    if (!formData.subject.trim()) {
+
+    if (subject.length < 3 || subject.length > 120) {
       toast({
-        title: "Error",
-        description: "Please enter a subject.",
-        variant: "destructive",
+        title: 'Error',
+        description: 'Please enter a subject between 3 and 120 characters.',
+        variant: 'destructive',
       });
       return false;
     }
-    if (!formData.message.trim()) {
+
+    if (message.length < MIN_MESSAGE_LENGTH || message.length > 2000) {
       toast({
-        title: "Error",
-        description: "Please enter your message.",
-        variant: "destructive",
+        title: 'Error',
+        description: `Please enter a message between ${MIN_MESSAGE_LENGTH} and 2000 characters.`,
+        variant: 'destructive',
       });
       return false;
     }
+
     return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -70,142 +103,156 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      // EmailJS configuration
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-        to_email: 'saisanthosh05012006@gmail.com'
-      };
+      const now = Date.now();
+      if (now - lastSubmittedAt < SUBMIT_COOLDOWN_MS) {
+        throw new Error('RATE_LIMITED');
+      }
 
-      // Replace these with your EmailJS credentials
-      const serviceId = 'your_service_id'; // Get from EmailJS dashboard
-      const templateId = 'your_template_id'; // Get from EmailJS dashboard  
-      const publicKey = 'your_public_key'; // Get from EmailJS dashboard
+      if (!emailServiceReady) {
+        throw new Error('EMAIL_SERVICE_NOT_CONFIGURED');
+      }
 
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      await emailjs.send(
+        EMAILJS_CONFIG.serviceId!,
+        EMAILJS_CONFIG.templateId!,
+        {
+          from_name: formData.name.trim(),
+          from_email: formData.email.trim(),
+          reply_to: formData.email.trim(),
+          subject: formData.subject.trim(),
+          message: formData.message.trim(),
+          to_email: CONTACT_EMAIL,
+        },
+        EMAILJS_CONFIG.publicKey!
+      );
 
+      setLastSubmittedAt(now);
       toast({
-        title: "Message Sent Successfully!",
+        title: 'Message Sent Successfully!',
         description: "Thank you for reaching out. I'll get back to you soon.",
       });
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', subject: '', message: '', company: '' });
     } catch (error) {
-      console.error('EmailJS Error:', error);
+      const isRateLimited = error instanceof Error && error.message === 'RATE_LIMITED';
+      const isNotConfigured = error instanceof Error && error.message === 'EMAIL_SERVICE_NOT_CONFIGURED';
+
       toast({
-        title: "Failed to Send Message",
-        description: "Please try again or contact me directly at saisanthosh05012006@gmail.com",
-        variant: "destructive",
+        title: isRateLimited ? 'Please Wait Before Sending Again' : 'Failed to Send Message',
+        description: isNotConfigured
+          ? `Email delivery is not configured yet. Please email me directly at ${CONTACT_EMAIL}.`
+          : isRateLimited
+            ? 'Please wait a moment before submitting another message.'
+            : `Please try again or contact me directly at ${CONTACT_EMAIL}.`,
+        variant: 'destructive',
       });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const contactInfo = [
-    {
-      icon: <Mail className="w-5 h-5" />,
-      label: "Email",
-      value: "saisanthosh05012006@gmail.com",
-      link: "mailto:saisanthosh05012006@gmail.com"
-    },
-    {
-      icon: <Phone className="w-5 h-5" />,
-      label: "Phone",
-      value: "+91 7569532243",
-      link: "tel:+917569532243"
-    },
-    {
-      icon: <MapPin className="w-5 h-5" />,
-      label: "Location",
-      value: "Anantapur, Andhra Pradesh",
-      link: null
-    },
-    {
-      icon: <Linkedin className="w-5 h-5" />,
-      label: "LinkedIn",
-      value: "linkedin.com/in/sai-santhosh-07603828b",
-      link: "https://www.linkedin.com/in/sai-santhosh-07603828b"
-    }
-  ];
-
   return (
-    <section id="contact" className="py-16 bg-background">
-      <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto">
+    <section id="contact" className="py-16 sm:py-20 bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-primary mb-3 text-balance">
               Let's Connect
             </h2>
             <div className="w-20 h-1 bg-accent mx-auto mb-4"></div>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-              I'm always interested in discussing new opportunities, collaborations, 
-              or just having a conversation about technology and innovation. 🤝
+              I'm always interested in discussing new opportunities, collaborations,
+              or just having a conversation about technology and innovation.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Contact Information */}
+          <div className="grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] gap-8 xl:gap-12">
             <div className="lg:col-span-1 space-y-6">
               <h3 className="text-xl font-semibold text-primary mb-4">
                 Get In Touch
               </h3>
-              
-              <div className="space-y-4">
-                {contactInfo.map((info, index) => (
-                  <div key={index} className="flex items-center space-x-4 group">
-                    <div className="flex-shrink-0 w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center group-hover:bg-accent/20 transition-smooth">
-                      <div className="text-accent">
-                        {info.icon}
-                      </div>
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">{info.label}</p>
-                      {info.link ? (
-                        <a href={info.link} className="text-primary hover:text-accent transition-smooth">
-                          {info.value}
-                        </a>
-                      ) : (
-                        <p className="text-primary">{info.value}</p>
-                      )}
-                    </div>
-                  </div>
-                ))}
+
+              <div className="space-y-3 rounded-2xl border border-border/60 bg-card/60 p-5">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-1">Email</p>
+                  <a className="font-medium text-primary hover:text-accent transition-colors break-all" href={`mailto:${CONTACT_EMAIL}`}>
+                    {CONTACT_EMAIL}
+                  </a>
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-1">Phone</p>
+                  <a className="font-medium text-primary hover:text-accent transition-colors" href={`tel:${CONTACT_PHONE.replace(/\s+/g, '')}`}>
+                    {CONTACT_PHONE}
+                  </a>
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-1">LinkedIn</p>
+                  <a className="font-medium text-primary hover:text-accent transition-colors break-all" href="https://www.linkedin.com/in/sai-santhosh-07603828b" target="_blank" rel="noopener noreferrer">
+                    linkedin.com/in/sai-santhosh-07603828b
+                  </a>
+                </div>
               </div>
 
-              {/* Social Links */}
               <div className="pt-6 border-t border-border">
-                <h4 className="text-lg font-semibold text-primary mb-4">🌟 Follow Me</h4>
-                <div className="flex space-x-4">
-                  <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer"
-                     className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-smooth">
+                <h4 className="text-lg font-semibold text-primary mb-4">Follow Me</h4>
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href="https://github.com/santhoshh005"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-smooth"
+                  >
                     <Github className="w-5 h-5" />
                   </a>
-                  <a href="https://www.linkedin.com/in/sai-santhosh-07603828b" target="_blank" rel="noopener noreferrer"
-                     className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-smooth">
+                  <a
+                    href="https://www.linkedin.com/in/sai-santhosh-07603828b"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-smooth"
+                  >
                     <Linkedin className="w-5 h-5" />
                   </a>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                     className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-smooth">
+                  <a
+                    href="https://www.instagram.com/santhoshh__05/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-smooth"
+                  >
                     <Instagram className="w-5 h-5" />
                   </a>
-                  <a href="mailto:saisanthosh05012006@gmail.com"
-                     className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-smooth">
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    aria-label="Email"
+                    className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-smooth"
+                  >
                     <Mail className="w-5 h-5" />
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Contact Form */}
-            <div className="lg:col-span-2">
-              <Card className="shadow-elegant">
+            <div>
+              <Card className="shadow-elegant border-border/60">
                 <CardHeader>
                   <CardTitle className="text-xl text-primary">Send Me a Message</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="hidden" aria-hidden="true">
+                      <label htmlFor="company">Company</label>
+                      <Input
+                        id="company"
+                        name="company"
+                        type="text"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={formData.company}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium text-primary mb-2">
@@ -216,6 +263,9 @@ const ContactSection = () => {
                           name="name"
                           type="text"
                           required
+                          minLength={2}
+                          maxLength={80}
+                          autoComplete="name"
                           value={formData.name}
                           onChange={handleInputChange}
                           placeholder="Your full name"
@@ -231,6 +281,8 @@ const ContactSection = () => {
                           name="email"
                           type="email"
                           required
+                          maxLength={120}
+                          autoComplete="email"
                           value={formData.email}
                           onChange={handleInputChange}
                           placeholder="your.email@example.com"
@@ -248,6 +300,8 @@ const ContactSection = () => {
                         name="subject"
                         type="text"
                         required
+                        minLength={3}
+                        maxLength={120}
                         value={formData.subject}
                         onChange={handleInputChange}
                         placeholder="What's this about?"
@@ -263,6 +317,8 @@ const ContactSection = () => {
                         id="message"
                         name="message"
                         required
+                        minLength={MIN_MESSAGE_LENGTH}
+                        maxLength={2000}
                         rows={6}
                         value={formData.message}
                         onChange={handleInputChange}
@@ -271,13 +327,18 @@ const ContactSection = () => {
                       />
                     </div>
 
-                    <Button 
-                      type="submit" 
+                    <p className="text-sm text-muted-foreground">
+                      Prefer a direct conversation? Reach me at {CONTACT_PHONE} or {CONTACT_EMAIL}.
+                    </p>
+
+                    <Button
+                      type="submit"
                       disabled={isSubmitting}
+                      aria-busy={isSubmitting}
                       className="w-full bg-accent hover:bg-accent/90 text-white transition-smooth"
                     >
                       {isSubmitting ? (
-                        "Sending..."
+                        'Sending...'
                       ) : (
                         <>
                           <Send className="w-4 h-4 mr-2" />

@@ -26,11 +26,11 @@ const skillCategories = [
 
 const SkillsSection = () => {
   return (
-    <section id="skills" className="py-16 bg-secondary">
-      <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
+    <section id="skills" className="py-16 sm:py-20 bg-secondary">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10 animate-fade-in">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-primary mb-3 text-balance">
               Technical Skills
             </h2>
             <div className="w-20 h-1 bg-accent mx-auto mb-4"></div>
@@ -39,11 +39,11 @@ const SkillsSection = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
             {skillCategories.map((cat, i) => (
               <Card
                 key={i}
-                className="shadow-card hover:shadow-elegant transition-all duration-300 hover:-translate-y-1 animate-fade-in"
+                className="h-full shadow-card hover:shadow-elegant transition-all duration-300 hover:-translate-y-1 animate-fade-in"
                 style={{ animationDelay: `${i * 100}ms` }}
               >
                 <CardContent className="p-6">
