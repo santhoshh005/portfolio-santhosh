@@ -112,16 +112,28 @@ const ContactSection = () => {
         throw new Error('EMAIL_SERVICE_NOT_CONFIGURED');
       }
 
+      const name = formData.name.trim();
+      const email = formData.email.trim();
+      const subject = formData.subject.trim();
+      const time = new Date().toLocaleString();
+
+      const composedMessage = `${formData.message.trim()}\n\n---\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\nTime: ${time}`;
+
       await emailjs.send(
         EMAILJS_CONFIG.serviceId!,
         EMAILJS_CONFIG.templateId!,
         {
-          from_name: formData.name.trim(),
-          from_email: formData.email.trim(),
-          reply_to: formData.email.trim(),
-          subject: formData.subject.trim(),
-          message: formData.message.trim(),
+          from_name: name,
+          from_email: email,
+          reply_to: email,
+          subject,
+          message: composedMessage,
           to_email: CONTACT_EMAIL,
+          name,
+          email,
+          title: subject,
+          time,
+          raw_message: formData.message.trim(),
         },
         EMAILJS_CONFIG.publicKey!
       );
