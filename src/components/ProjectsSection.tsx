@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { ExternalLink, Sparkles } from 'lucide-react';
+import { useMemo, useState, useEffect } from 'react';
+import { ExternalLink, Sparkles, X } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -38,6 +38,55 @@ const projects: Project[] = [
     categories: ['Web Development', 'Full Stack'],
   },
   {
+    title: 'E-commerce Web Application',
+    description:
+      'A full-featured e-commerce platform offering a seamless shopping experience, interactive product catalog with search & filter, cart management, and a streamlined checkout flow.',
+    image:
+      'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&w=1200&q=80',
+    tech: ['React', 'Vite', 'Tailwind CSS', 'State Management', 'Web APIs'],
+    features: [
+      'Dynamic product catalog with filtering',
+      'Real-time cart adding/removing and quantity updates',
+      'Fully responsive e-commerce checkout flow',
+      'Clean and modern design with smooth UI transitions',
+    ],
+    demo: 'https://e-commerce-web-application-sbmi.vercel.app/',
+    github: 'https://github.com/santhoshh005/E-commerce-Web-Application',
+    categories: ['Web Development', 'Full Stack'],
+  },
+  {
+    title: 'Blog Platform',
+    description:
+      'A content publishing platform where users can read, write, edit, and categorize blog posts, featuring a distraction-free editing layout and categorization tools.',
+    image:
+      'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=80',
+    tech: ['React', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB'],
+    features: [
+      'Markdown-style rich text post writing & editing',
+      'Dynamic blog search and category sorting',
+      'User authorship indicators and posting dashboard',
+      'Responsive design for optimal readability',
+    ],
+    github: 'https://github.com/santhoshh005/Blog-platform-',
+    categories: ['Web Development', 'Full Stack'],
+  },
+  {
+    title: 'Task Management Platform',
+    description:
+      'A productivity app for organizing work, tracking milestones, and categorization using a Kanban board style layout, priority indicators, and persistent local storage.',
+    image:
+      'https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?auto=format&fit=crop&w=1200&q=80',
+    tech: ['React', 'Tailwind CSS', 'TypeScript', 'Context API', 'Local Storage'],
+    features: [
+      'Interactive Kanban board with status columns',
+      'Task creation, prioritization, and editing tools',
+      'Task details view and checklists support',
+      'Data persistence using browser localStorage',
+    ],
+    github: 'https://github.com/santhoshh005/Task-Management-',
+    categories: ['Web Development', 'Full Stack'],
+  },
+  {
     title: 'AI Flood Prediction Model',
     description:
       'An AI-based flood prediction model that analyzes rainfall, river level, and historical weather patterns to estimate flood risk and support early warning decisions.',
@@ -58,22 +107,45 @@ const projects: Project[] = [
 const filters: Category[] = ['All', 'Web Development', 'AI Projects', 'Full Stack'];
 
 const stats = [
-  { value: '2+', label: 'Projects Completed' },
-  { value: '2+', label: 'Internships' },
-  { value: 'Fresher', label: 'Status' },
+  { value: '5', label: 'Projects Completed' },
+  { value: '2', label: 'Internships' },
+  { value: 'Active', label: 'Status' },
   { value: '100%', label: 'Passion For Development' },
 ];
 
 const ProjectsSection = () => {
   const [active, setActive] = useState<Category>('All');
+  const [selectedTech, setSelectedTech] = useState<string | null>(null);
 
-  const filtered = useMemo(
-    () => (active === 'All' ? projects : projects.filter((project) => project.categories.includes(active))),
-    [active]
-  );
+  useEffect(() => {
+    const handleFilterEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<string>;
+      if (customEvent.detail) {
+        setSelectedTech(customEvent.detail);
+        setActive('All'); // Reset category filter when specific tech clicked
+      }
+    };
+    window.addEventListener('filter-projects-by-tech', handleFilterEvent);
+    return () => window.removeEventListener('filter-projects-by-tech', handleFilterEvent);
+  }, []);
+
+  const filtered = useMemo(() => {
+    let list = projects;
+    if (active !== 'All') {
+      list = list.filter((project) => project.categories.includes(active));
+    }
+    if (selectedTech) {
+      const techLower = selectedTech.toLowerCase();
+      list = list.filter((project) => 
+        project.tech.some(t => t.toLowerCase() === techLower || t.toLowerCase().includes(techLower)) ||
+        project.title.toLowerCase().includes(techLower)
+      );
+    }
+    return list;
+  }, [active, selectedTech]);
 
   return (
-    <section id="projects" className="py-20 sm:py-24 bg-background relative overflow-hidden">
+    <section id="projects" className="py-20 sm:py-24 bg-secondary relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10 animate-fade-in">
@@ -89,14 +161,17 @@ const ProjectsSection = () => {
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-2 mb-10 animate-fade-in" role="tablist" aria-label="Project filters">
+          <div className="flex flex-wrap justify-center gap-2 mb-6 animate-fade-in" role="tablist" aria-label="Project filters">
             {filters.map((filter) => (
               <button
                 key={filter}
                 type="button"
                 role="tab"
                 aria-selected={active === filter}
-                onClick={() => setActive(filter)}
+                onClick={() => {
+                  setActive(filter);
+                  setSelectedTech(null); // Clear tech filter on category switch
+                }}
                 className={cn(
                   'px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300',
                   active === filter
@@ -108,6 +183,23 @@ const ProjectsSection = () => {
               </button>
             ))}
           </div>
+
+          {selectedTech && (
+            <div className="flex justify-center items-center gap-2 mb-10 animate-fade-in">
+              <span className="text-sm text-muted-foreground">
+                Showing projects matching <span className="font-semibold text-accent">{selectedTech}</span>
+              </span>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7 px-2 text-xs text-accent hover:text-accent/90 hover:bg-accent/10 border border-accent/20 rounded-lg flex items-center gap-1 cursor-pointer"
+                onClick={() => setSelectedTech(null)}
+              >
+                <X className="w-3 h-3" />
+                Clear
+              </Button>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
             {filtered.length === 0 ? (
@@ -171,7 +263,7 @@ const ProjectsSection = () => {
                         <Button asChild size="sm" className="flex-1 bg-accent hover:bg-accent/90">
                           <a href={project.demo} target="_blank" rel="noopener noreferrer">
                           <ExternalLink className="w-4 h-4" />
-                          Edge Add-ons
+                          {project.demo.includes('microsoftedge') ? 'Edge Add-ons' : 'Live Demo'}
                           </a>
                         </Button>
                       )}

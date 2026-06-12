@@ -9,9 +9,9 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-5">
           <div className="space-y-1">
-            <p className="text-base sm:text-lg font-semibold tracking-tight">Santhosh</p>
+            <p className="text-base sm:text-lg font-semibold tracking-tight">Sai Santhosh</p>
             <p className="text-xs sm:text-sm text-primary-foreground/75 max-w-xl">
-              Software developer focused on practical products, clean interfaces, and reliable delivery.
+              Software developer focused on clean, practical, and scalable software solutions.
             </p>
           </div>
 
@@ -28,7 +28,7 @@ const Footer = () => {
             <a href="https://github.com/santhoshh005" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground transition-colors">
               GitHub
             </a>
-            <a href="https://www.instagram.com/santhoshh__05/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground transition-colors">
+            <a href="https://www.instagram.com/santhoshh__05?igsh=ZmkxcWV3NGhlb2V3" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground transition-colors">
               Instagram
             </a>
           </div>
@@ -36,7 +36,7 @@ const Footer = () => {
 
         <div className="mt-4 pt-4 border-t border-primary-foreground/15 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs sm:text-sm text-primary-foreground/75">
           <div className="flex items-center gap-1.5">
-            <span>&copy; {currentYear} Santhosh</span>
+            <span>&copy; {currentYear} Sai Santhosh</span>
             <Heart className="w-3 h-3 text-red-400 fill-current" aria-hidden="true" />
             <span>Designed for performance and clarity</span>
           </div>

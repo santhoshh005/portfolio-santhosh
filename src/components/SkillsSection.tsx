@@ -1,50 +1,77 @@
-import { Code2, Layout, Server, Wrench } from 'lucide-react';
+import { Code2, Layout, Server, Wrench, Brain, Cpu } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
 const skillCategories = [
   {
     icon: <Code2 className="w-5 h-5 text-accent" />,
     title: 'Languages',
-    skills: ['Python', 'JavaScript', 'TypeScript', 'C / C++', 'Java', 'SQL'],
+    skills: ['Java', 'Python', 'JavaScript', 'TypeScript', 'C / C++', 'SQL'],
   },
   {
     icon: <Layout className="w-5 h-5 text-accent" />,
-    title: 'Frontend',
-    skills: ['React', 'HTML5', 'CSS3', 'Tailwind CSS'],
+    title: 'Frontend & Web Dev',
+    skills: ['Web Development', 'React', 'HTML5', 'CSS3', 'Tailwind CSS'],
   },
   {
     icon: <Server className="w-5 h-5 text-accent" />,
-    title: 'Backend & Tools',
-    skills: ['Node.js', 'Git', 'GitHub', 'REST APIs'],
+    title: 'Backend & Databases',
+    skills: ['Node.js', 'Express', 'MongoDB', 'REST APIs', 'Web APIs'],
+  },
+  {
+    icon: <Brain className="w-5 h-5 text-accent" />,
+    title: 'AI & Data Science',
+    skills: ['Pandas', 'NumPy', 'Scikit-learn', 'XGBoost', 'LightGBM', 'Jupyter Notebook'],
+  },
+  {
+    icon: <Cpu className="w-5 h-5 text-accent" />,
+    title: 'Browser Extensions',
+    skills: ['Manifest V3', 'Web Crypto', 'PDF.js', 'Vite', 'Local Storage', 'Context API'],
   },
   {
     icon: <Wrench className="w-5 h-5 text-accent" />,
-    title: 'Other',
-    skills: ['Browser Extensions', 'UI/UX Design', 'Problem Solving'],
+    title: 'Fundamentals & Tools',
+    skills: ['Algorithms', 'Problem Solving', 'Git', 'GitHub', 'UI/UX Design'],
   },
 ];
 
 const SkillsSection = () => {
+  const handleSkillClick = (skill: string) => {
+    // Dispatch custom event to filter projects
+    const event = new CustomEvent('filter-projects-by-tech', { detail: skill });
+    window.dispatchEvent(event);
+    
+    // Smooth scroll to projects
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+      const navHeight = 72;
+      const elementPosition = projectsSection.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - navHeight,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
-    <section id="skills" className="py-16 sm:py-20 bg-secondary">
+    <section id="skills" className="py-20 sm:py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10 animate-fade-in">
             <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-primary mb-3 text-balance">
               Technical Skills
             </h2>
             <div className="w-20 h-1 bg-accent mx-auto mb-4"></div>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Technologies and tools I work with to build modern, scalable applications.
+              Technologies, tools, and concepts from my projects and developer journey. Click on a skill to see matching projects!
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {skillCategories.map((cat, i) => (
               <Card
                 key={i}
                 className="h-full shadow-card hover:shadow-elegant transition-all duration-300 hover:-translate-y-1 animate-fade-in"
-                style={{ animationDelay: `${i * 100}ms` }}
+                style={{ animationDelay: `${i * 75}ms` }}
               >
                 <CardContent className="p-6">
                   <div className="flex items-center gap-2 mb-4">
@@ -55,7 +82,8 @@ const SkillsSection = () => {
                     {cat.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="px-3 py-1.5 bg-background rounded-full text-sm text-muted-foreground border border-border/60 hover:border-accent/40 hover:text-accent transition-colors duration-300"
+                        onClick={() => handleSkillClick(skill)}
+                        className="px-3 py-1.5 bg-background rounded-full text-sm text-muted-foreground border border-border/60 hover:border-accent/40 hover:text-accent hover:bg-accent/5 cursor-pointer select-none transition-all duration-300"
                       >
                         {skill}
                       </span>

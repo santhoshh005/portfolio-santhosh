@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Github, Instagram, Linkedin, Mail, Send } from 'lucide-react';
+import { Github, Instagram, Linkedin, Mail, Send, Copy, Check } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 import { Button } from '@/components/ui/button';
@@ -31,6 +31,24 @@ const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [lastSubmittedAt, setLastSubmittedAt] = useState(0);
   const { toast } = useToast();
+
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
+
+  const handleCopy = (text: string, type: 'email' | 'phone') => {
+    navigator.clipboard.writeText(text);
+    if (type === 'email') {
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2000);
+    } else {
+      setCopiedPhone(true);
+      setTimeout(() => setCopiedPhone(false), 2000);
+    }
+    toast({
+      title: 'Copied to Clipboard!',
+      description: `${type === 'email' ? 'Email address' : 'Phone number'} copied successfully.`,
+    });
+  };
 
   const emailServiceReady = useMemo(
     () => Boolean(EMAILJS_CONFIG.serviceId && EMAILJS_CONFIG.templateId && EMAILJS_CONFIG.publicKey),
@@ -163,7 +181,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-20 bg-background">
+    <section id="contact" className="py-20 sm:py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -183,18 +201,42 @@ const ContactSection = () => {
                 Get In Touch
               </h3>
 
-              <div className="space-y-3 rounded-2xl border border-border/60 bg-card/60 p-5">
+              <div className="space-y-4 rounded-2xl border border-border/60 bg-card/60 p-5">
                 <div>
                   <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-1">Email</p>
-                  <a className="font-medium text-primary hover:text-accent transition-colors break-all" href={`mailto:${CONTACT_EMAIL}`}>
-                    {CONTACT_EMAIL}
-                  </a>
+                  <div className="flex items-center justify-between gap-2">
+                    <a className="font-medium text-primary hover:text-accent transition-colors break-all" href={`mailto:${CONTACT_EMAIL}`}>
+                      {CONTACT_EMAIL}
+                    </a>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 hover:bg-accent/15 hover:text-accent transition-colors shrink-0"
+                      onClick={() => handleCopy(CONTACT_EMAIL, 'email')}
+                      aria-label="Copy email address"
+                    >
+                      {copiedEmail ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+                    </Button>
+                  </div>
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-1">Phone</p>
-                  <a className="font-medium text-primary hover:text-accent transition-colors" href={`tel:${CONTACT_PHONE.replace(/\s+/g, '')}`}>
-                    {CONTACT_PHONE}
-                  </a>
+                  <div className="flex items-center justify-between gap-2">
+                    <a className="font-medium text-primary hover:text-accent transition-colors" href={`tel:${CONTACT_PHONE.replace(/\s+/g, '')}`}>
+                      {CONTACT_PHONE}
+                    </a>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 hover:bg-accent/15 hover:text-accent transition-colors shrink-0"
+                      onClick={() => handleCopy(CONTACT_PHONE, 'phone')}
+                      aria-label="Copy phone number"
+                    >
+                      {copiedPhone ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+                    </Button>
+                  </div>
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-1">LinkedIn</p>
@@ -226,7 +268,7 @@ const ContactSection = () => {
                     <Linkedin className="w-5 h-5" />
                   </a>
                   <a
-                    href="https://www.instagram.com/santhoshh__05/"
+                    href="https://www.instagram.com/santhoshh__05?igsh=ZmkxcWV3NGhlb2V3"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"

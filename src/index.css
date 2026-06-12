@@ -121,6 +121,13 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
+  /* Smooth transition for theme switching */
+  body, section, header, nav, footer, [class*="bg-"], [class*="text-"], [class*="border-"], input, textarea, button, a, svg {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 400ms;
+  }
+
   /* Smooth scrolling */
   html {
     scroll-behavior: smooth;

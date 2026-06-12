@@ -7,6 +7,8 @@ import { useTheme } from 'next-themes';
 const navItems = [
   { label: 'Home', section: 'hero' },
   { label: 'About', section: 'about' },
+  { label: 'Experience', section: 'resume' },
+  { label: 'Certifications', section: 'certifications' },
   { label: 'Skills', section: 'skills' },
   { label: 'Projects', section: 'projects' },
   { label: 'Contact', section: 'contact' },
@@ -84,7 +86,7 @@ const Navigation = () => {
             aria-label="Go to home section"
             className="justify-self-start whitespace-nowrap text-xl sm:text-2xl font-bold text-primary hover:text-accent transition-colors duration-300"
           >
-            Santhosh
+            Sai Santhosh
           </button>
 
           {/* Desktop Navigation */}

@@ -1,9 +1,122 @@
+import { useEffect } from 'react';
 import { ArrowDown, Github, Linkedin, Mail, Instagram, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL ?? 'saisanthosh05012006@gmail.com';
 
 const HeroSection = () => {
+  useEffect(() => {
+    const canvas = document.getElementById('hero-particles') as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animationFrameId: number;
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    class Particle {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+      color: string;
+
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.35;
+        this.vy = (Math.random() - 0.5) * 0.35;
+        this.radius = Math.random() * 2 + 0.5;
+        this.color = Math.random() > 0.4 ? 'rgba(45, 138, 138, 0.45)' : 'rgba(255, 255, 255, 0.3)';
+      }
+
+      update(mouse: { x: number; y: number }) {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > width) this.vx = -this.vx;
+        if (this.y < 0 || this.y > height) this.vy = -this.vy;
+
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          const force = (120 - dist) / 120;
+          this.x += (dx / dist) * force * 1.5;
+          this.y += (dy / dist) * force * 1.5;
+        }
+      }
+
+      draw() {
+        if (!ctx) return;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+
+    const particles: Particle[] = Array.from({ length: 60 }, () => new Particle());
+    const mouse = { x: -1000, y: -1000 };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    };
+
+    const handleResize = () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('resize', handleResize);
+
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update(mouse);
+        particles[i].draw();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 110) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(45, 138, 138, ${0.12 * (1 - dist / 110)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -13,9 +126,10 @@ const HeroSection = () => {
 
   return (
     <section id="hero" className="min-h-[100svh] flex items-center relative overflow-hidden pt-24 sm:pt-28">
-      {/* Animated gradient background */}
+      {/* Animated gradient background with canvas particles */}
       <div className="absolute inset-0 gradient-hero">
-        <div className="absolute inset-0 bg-black/30"></div>
+        <canvas id="hero-particles" className="absolute inset-0 w-full h-full opacity-55 mix-blend-screen" />
+        <div className="absolute inset-0 bg-black/35"></div>
       </div>
 
       {/* Subtle animated glow orbs */}
@@ -33,21 +147,16 @@ const HeroSection = () => {
           <h1 className="text-[clamp(2.5rem,8vw,5.5rem)] font-bold mb-5 animate-fade-in leading-tight text-balance">
             Hi, I'm{' '}
             <span className="bg-gradient-to-r from-accent to-blue-300 bg-clip-text text-transparent">
-              Santhosh
+              Sai Santhosh
             </span>
           </h1>
 
-          <p className="text-lg md:text-2xl mb-5 text-gray-200 animate-fade-in animate-fade-in-delay-1 font-light">
-            Software Developer &amp; Computer Science Student
-          </p>
-
-          <p className="text-base md:text-lg mb-10 text-gray-300 max-w-2xl mx-auto animate-fade-in animate-fade-in-delay-2 leading-relaxed">
-            Passionate about crafting clean, scalable, and meaningful software.
-            I build privacy-first tools, full-stack apps, and developer-focused experiences.
+          <p className="text-base md:text-lg mb-10 text-gray-300 max-w-2xl mx-auto animate-fade-in animate-fade-in-delay-1 leading-relaxed">
+            Passionate about software development, full-stack engineering, and emerging technologies. I build scalable applications, explore innovative solutions, and transform ideas into seamless digital experiences.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center mb-10 animate-fade-in animate-fade-in-delay-3">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center mb-10 animate-fade-in animate-fade-in-delay-2">
             <Button
               size="lg"
               asChild
@@ -69,7 +178,7 @@ const HeroSection = () => {
           </div>
 
           {/* Social Links */}
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-5 mb-12 animate-fade-in animate-fade-in-delay-3">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-5 mb-12 animate-fade-in animate-fade-in-delay-2">
             <a
               href="https://github.com/santhoshh005"
               target="_blank"

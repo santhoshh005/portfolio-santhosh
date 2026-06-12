@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, GraduationCap, Code, Target, Heart } from 'lucide-react';
+import { GraduationCap, Code, Target, Heart } from 'lucide-react';
 
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -23,16 +23,11 @@ const AboutSection = () => {
       icon: <Heart className="w-6 h-6 text-accent" />,
       title: "Continuous Learner",
       description: "Always curious, always growing"
-    },
-    {
-      icon: <BriefcaseBusiness className="w-6 h-6 text-accent" />,
-      title: "Work Experience",
-      description: "Fresher with practical experience in Java, Web Development, and Microsoft Edge Extension projects"
     }
   ];
 
   return (
-    <section id="about" className="py-16 sm:py-20 bg-secondary">
+    <section id="about" className="py-20 sm:py-24 bg-secondary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
@@ -46,7 +41,7 @@ const AboutSection = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {highlights.map((item, index) => (
               <Card 
                 key={index} 
