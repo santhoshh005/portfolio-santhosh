@@ -2,18 +2,18 @@ import { Briefcase, GraduationCap, Calendar, MapPin } from 'lucide-react';
 
 const experience = [
   {
-    role: "Full-Stack Web Development Intern",
-    company: "Thiranex",
-    duration: "June 2026 - Present",
-    location: "India",
-    description: "Developing responsive full-stack web applications, integrating modern API solutions, and crafting clean, user-centric interfaces."
-  },
-  {
     role: "Web Development Intern",
     company: "InAmigos Foundation (IAF)",
     duration: "June 2026 - Present",
     location: "India",
     description: "Developing and maintaining web applications, working on frontend interfaces."
+  },
+  {
+    role: "Full-Stack Web Development Intern",
+    company: "Thiranex",
+    duration: "June 2026 - Present",
+    location: "India",
+    description: "Developing responsive full-stack web applications, integrating modern API solutions, and crafting clean, user-centric interfaces."
   }
 ];
 

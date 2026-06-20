@@ -55,6 +55,22 @@ const projects: Project[] = [
     categories: ['Web Development', 'Full Stack'],
   },
   {
+    title: 'Virtual Fitness Trainer (AI Fit Coach)',
+    description:
+      'An AI-first web app using computer vision for real-time exercise form tracking and posture analysis, featuring a motivational AI coach chatbot for custom workout plans.',
+    image:
+      'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1200&q=80',
+    tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'shadcn/ui', 'Firebase Auth', 'Firestore', 'Recharts'],
+    features: [
+      'Developed an AI-first web app using computer vision for real-time exercise form tracking and posture analysis.',
+      'Built a motivational AI coach chatbot using GPT API to provide nutrition guidance and custom workout plans.',
+      'Implemented session analytics dashboard with Firestore database persistence, charting user metrics over time.',
+    ],
+    demo: 'https://ai-fit-coach-hc8m.vercel.app/',
+    github: 'https://github.com/santhoshh005/AI-Fit-Coach',
+    categories: ['Web Development', 'Full Stack'],
+  },
+  {
     title: 'Blog Platform',
     description:
       'A content publishing platform where users can read, write, edit, and categorize blog posts, featuring a distraction-free editing layout and categorization tools.',
@@ -86,6 +102,7 @@ const projects: Project[] = [
     github: 'https://github.com/santhoshh005/Task-Management-',
     categories: ['Web Development', 'Full Stack'],
   },
+
   {
     title: 'AI Flood Prediction Model',
     description:
@@ -107,7 +124,7 @@ const projects: Project[] = [
 const filters: Category[] = ['All', 'Web Development', 'AI Projects', 'Full Stack'];
 
 const stats = [
-  { value: '5', label: 'Projects Completed' },
+  { value: '6', label: 'Projects Completed' },
   { value: '2', label: 'Internships' },
   { value: 'Active', label: 'Status' },
   { value: '100%', label: 'Passion For Development' },

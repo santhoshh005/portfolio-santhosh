@@ -79,41 +79,56 @@ const Navigation = () => {
           : 'bg-transparent'
       )}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 sm:h-20">
-        <div className="grid h-full grid-cols-[1fr_auto_1fr] items-center gap-4">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 sm:h-20 relative">
+        <div className="flex h-full items-center justify-between gap-4">
           <button
             onClick={() => scrollToSection('hero')}
             aria-label="Go to home section"
-            className="justify-self-start whitespace-nowrap text-xl sm:text-2xl font-bold text-primary hover:text-accent transition-colors duration-300"
+            className={cn(
+              'whitespace-nowrap text-xl sm:text-2xl font-bold transition-colors duration-300',
+              isScrolled ? 'text-primary hover:text-accent' : 'text-white hover:text-accent-foreground'
+            )}
           >
             Sai Santhosh
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center justify-center gap-1 justify-self-center">
-            {navItems.map((item) => (
-              <button
-                key={item.section}
-                onClick={() => scrollToSection(item.section)}
-                aria-current={activeSection === item.section ? 'page' : undefined}
-                className={cn(
-                  'inline-flex h-10 items-center px-4 rounded-lg text-sm font-medium transition-all duration-300',
-                  activeSection === item.section
-                    ? 'text-accent bg-accent/10'
-                    : 'text-foreground hover:text-accent hover:bg-accent/5'
-                )}
-              >
-                {item.label}
-              </button>
-            ))}
+          <div className="hidden md:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
+            {navItems.map((item) => {
+              const isActive = activeSection === item.section;
+              return (
+                <button
+                  key={item.section}
+                  onClick={() => scrollToSection(item.section)}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={cn(
+                    'inline-flex h-10 items-center px-4 rounded-lg text-sm font-medium transition-all duration-300',
+                    isActive
+                      ? isScrolled
+                        ? 'text-accent bg-accent/10'
+                        : 'text-white bg-white/15'
+                      : isScrolled
+                        ? 'text-foreground hover:text-accent hover:bg-accent/5'
+                        : 'text-white/85 hover:text-white hover:bg-white/10'
+                  )}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
           </div>
 
-          <div className="flex items-center justify-end gap-2 justify-self-end">
+          <div className="flex items-center gap-2">
             <Button
               type="button"
               variant="ghost"
               size="icon"
-              className="hidden md:inline-flex h-10 w-10 hover:bg-accent/10"
+              className={cn(
+                'inline-flex h-10 w-10 transition-colors duration-300',
+                isScrolled
+                  ? 'text-foreground hover:bg-accent/10 hover:text-accent'
+                  : 'text-white hover:bg-white/10 hover:text-white'
+              )}
               onClick={() => setTheme(isDarkMode ? 'light' : 'dark')}
               aria-label={mounted ? `Switch to ${isDarkMode ? 'light' : 'dark'} mode` : 'Toggle theme'}
             >
@@ -125,7 +140,12 @@ const Navigation = () => {
               type="button"
               variant="ghost"
               size="sm"
-              className="md:hidden h-10 w-10 hover:bg-accent/10"
+              className={cn(
+                'md:hidden h-10 w-10 transition-colors duration-300',
+                isScrolled
+                  ? 'text-foreground hover:bg-accent/10 hover:text-accent'
+                  : 'text-white hover:bg-white/10 hover:text-white'
+              )}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-navigation"

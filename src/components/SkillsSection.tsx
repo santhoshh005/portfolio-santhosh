@@ -1,36 +1,31 @@
-import { Code2, Layout, Server, Wrench, Brain, Cpu } from 'lucide-react';
+import { Code2, Layout, Server, Wrench, Brain } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
 const skillCategories = [
   {
     icon: <Code2 className="w-5 h-5 text-accent" />,
     title: 'Languages',
-    skills: ['Java', 'Python', 'JavaScript', 'TypeScript', 'C / C++', 'SQL'],
+    skills: ['Java', 'Python', 'JavaScript', 'TypeScript', 'C / C++', 'SQL', 'Bash'],
   },
   {
     icon: <Layout className="w-5 h-5 text-accent" />,
     title: 'Frontend & Web Dev',
-    skills: ['Web Development', 'React', 'HTML5', 'CSS3', 'Tailwind CSS'],
+    skills: ['Web Development', 'React', 'HTML5', 'CSS3', 'Tailwind CSS', 'Vite', 'Context API', 'Chart.js'],
   },
   {
     icon: <Server className="w-5 h-5 text-accent" />,
     title: 'Backend & Databases',
-    skills: ['Node.js', 'Express', 'MongoDB', 'REST APIs', 'Web APIs'],
+    skills: ['Node.js', 'Express', 'MongoDB', 'REST APIs', 'Web APIs', 'Local Storage'],
   },
   {
     icon: <Brain className="w-5 h-5 text-accent" />,
     title: 'AI & Data Science',
-    skills: ['Pandas', 'NumPy', 'Scikit-learn', 'XGBoost', 'LightGBM', 'Jupyter Notebook'],
-  },
-  {
-    icon: <Cpu className="w-5 h-5 text-accent" />,
-    title: 'Browser Extensions',
-    skills: ['Manifest V3', 'Web Crypto', 'PDF.js', 'Vite', 'Local Storage', 'Context API'],
+    skills: ['Machine Learning', 'Pandas', 'NumPy', 'Scikit-learn', 'XGBoost', 'LightGBM', 'Jupyter Notebook'],
   },
   {
     icon: <Wrench className="w-5 h-5 text-accent" />,
     title: 'Fundamentals & Tools',
-    skills: ['Algorithms', 'Problem Solving', 'Git', 'GitHub', 'UI/UX Design'],
+    skills: ['Algorithms', 'Data Structures', 'OOP', 'SOLID Principles', 'Git', 'GitHub', 'Jenkins', 'Vibe Coding', 'Manifest V3', 'Web Crypto', 'PDF.js'],
   },
 ];
 

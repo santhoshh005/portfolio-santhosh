@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Github, Instagram, Linkedin, Mail, Send, Copy, Check } from 'lucide-react';
+import { Github, Instagram, Linkedin, Mail, Send, Copy, Check, Phone } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 import { Button } from '@/components/ui/button';
@@ -133,9 +133,20 @@ const ContactSection = () => {
       const name = formData.name.trim();
       const email = formData.email.trim();
       const subject = formData.subject.trim();
-      const time = new Date().toLocaleString();
+      const message = formData.message.trim();
+      const formattedTime = new Date().toLocaleString();
 
-      const composedMessage = `${formData.message.trim()}\n\n---\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\nTime: ${time}`;
+      // We now construct a detailed layout of the message including all metadata
+      const detailedMessage = `Subject: ${subject}
+
+Message:
+${message}
+
+----------------------------------------
+Sender Contact Details:
+Name: ${name}
+Email: ${email}
+Sent At: ${formattedTime}`;
 
       await emailjs.send(
         EMAILJS_CONFIG.serviceId!,
@@ -145,13 +156,13 @@ const ContactSection = () => {
           from_email: email,
           reply_to: email,
           subject,
-          message: composedMessage,
+          message: detailedMessage,
           to_email: CONTACT_EMAIL,
           name,
           email,
           title: subject,
-          time,
-          raw_message: formData.message.trim(),
+          time: formattedTime,
+          raw_message: message,
         },
         EMAILJS_CONFIG.publicKey!
       );
@@ -205,9 +216,12 @@ const ContactSection = () => {
                 <div>
                   <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-1">Email</p>
                   <div className="flex items-center justify-between gap-2">
-                    <a className="font-medium text-primary hover:text-accent transition-colors break-all" href={`mailto:${CONTACT_EMAIL}`}>
-                      {CONTACT_EMAIL}
-                    </a>
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <Mail className="w-4 h-4 text-accent shrink-0" />
+                      <a className="font-medium text-primary hover:text-accent transition-colors break-all text-sm sm:text-base" href={`mailto:${CONTACT_EMAIL}`}>
+                        {CONTACT_EMAIL}
+                      </a>
+                    </div>
                     <Button
                       type="button"
                       variant="ghost"
@@ -223,9 +237,12 @@ const ContactSection = () => {
                 <div>
                   <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-1">Phone</p>
                   <div className="flex items-center justify-between gap-2">
-                    <a className="font-medium text-primary hover:text-accent transition-colors" href={`tel:${CONTACT_PHONE.replace(/\s+/g, '')}`}>
-                      {CONTACT_PHONE}
-                    </a>
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <Phone className="w-4 h-4 text-accent shrink-0" />
+                      <a className="font-medium text-primary hover:text-accent transition-colors text-sm sm:text-base" href={`tel:${CONTACT_PHONE.replace(/\s+/g, '')}`}>
+                        {CONTACT_PHONE}
+                      </a>
+                    </div>
                     <Button
                       type="button"
                       variant="ghost"
@@ -240,9 +257,12 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-1">LinkedIn</p>
-                  <a className="font-medium text-primary hover:text-accent transition-colors break-all" href="https://www.linkedin.com/in/sai-santhosh-07603828b" target="_blank" rel="noopener noreferrer">
-                    linkedin.com/in/sai-santhosh-07603828b
-                  </a>
+                  <div className="flex items-center gap-2.5 min-w-0 pt-1">
+                    <Linkedin className="w-4 h-4 text-accent shrink-0" />
+                    <a className="font-medium text-primary hover:text-accent transition-colors break-all text-sm sm:text-base" href="https://www.linkedin.com/in/sai-santhosh-07603828b" target="_blank" rel="noopener noreferrer">
+                      linkedin.com/in/sai-santhosh-07603828b
+                    </a>
+                  </div>
                 </div>
               </div>
 

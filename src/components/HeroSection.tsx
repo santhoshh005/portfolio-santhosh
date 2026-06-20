@@ -23,30 +23,85 @@ const HeroSection = () => {
       vy: number;
       radius: number;
       color: string;
+      baseVx: number;
+      baseVy: number;
+      life: number;
+      decay: number;
+      isBurst: boolean;
 
-      constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.35;
-        this.vy = (Math.random() - 0.5) * 0.35;
-        this.radius = Math.random() * 2 + 0.5;
-        this.color = Math.random() > 0.4 ? 'rgba(45, 138, 138, 0.45)' : 'rgba(255, 255, 255, 0.3)';
+      constructor(clickX?: number, clickY?: number, isBurst = false) {
+        this.isBurst = isBurst;
+        
+        if (isBurst && clickX !== undefined && clickY !== undefined) {
+          this.x = clickX;
+          this.y = clickY;
+          // Spawn moving outward in all directions
+          const angle = Math.random() * Math.PI * 2;
+          const speed = Math.random() * 3 + 1.8;
+          this.vx = Math.cos(angle) * speed;
+          this.vy = Math.sin(angle) * speed;
+          this.baseVx = Math.cos(angle) * 0.3;
+          this.baseVy = Math.sin(angle) * 0.3;
+          this.radius = Math.random() * 1.5 + 1.0;
+          this.life = 1.0;
+          this.decay = Math.random() * 0.015 + 0.01; // fades out in ~1 to 2 seconds
+          this.color = Math.random() > 0.4 ? 'rgba(56, 189, 248, 1)' : 'rgba(255, 255, 255, 0.95)';
+        } else {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.vx = (Math.random() - 0.5) * 0.5;
+          this.vy = (Math.random() - 0.5) * 0.5;
+          this.baseVx = this.vx;
+          this.baseVy = this.vy;
+          this.radius = Math.random() * 2 + 1.2;
+          this.life = 1.0;
+          this.decay = 0;
+          this.color = Math.random() > 0.4 ? 'rgba(56, 189, 248, 0.8)' : 'rgba(255, 255, 255, 0.65)';
+        }
       }
 
       update(mouse: { x: number; y: number }) {
         this.x += this.vx;
         this.y += this.vy;
 
-        if (this.x < 0 || this.x > width) this.vx = -this.vx;
-        if (this.y < 0 || this.y > height) this.vy = -this.vy;
+        if (this.isBurst) {
+          this.life -= this.decay;
+        }
 
-        const dx = this.x - mouse.x;
-        const dy = this.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
-          const force = (120 - dist) / 120;
-          this.x += (dx / dist) * force * 1.5;
-          this.y += (dy / dist) * force * 1.5;
+        // Boundaries with bounce behavior
+        if (this.x < 0) {
+          this.x = 0;
+          this.vx = -this.vx;
+        } else if (this.x > width) {
+          this.x = width;
+          this.vx = -this.vx;
+        }
+        if (this.y < 0) {
+          this.y = 0;
+          this.vy = -this.vy;
+        } else if (this.y > height) {
+          this.y = height;
+          this.vy = -this.vy;
+        }
+
+        // Smooth mouse push interaction (only apply to baseline particles)
+        if (!this.isBurst) {
+          const dx = this.x - mouse.x;
+          const dy = this.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const maxDist = 160;
+
+          if (dist < maxDist) {
+            const force = (maxDist - dist) / maxDist;
+            const angle = Math.atan2(dy, dx);
+            const targetVx = this.baseVx + Math.cos(angle) * force * 2.2;
+            const targetVy = this.baseVy + Math.sin(angle) * force * 2.2;
+            this.vx += (targetVx - this.vx) * 0.15;
+            this.vy += (targetVy - this.vy) * 0.15;
+          } else {
+            this.vx += (this.baseVx - this.vx) * 0.08;
+            this.vy += (this.baseVy - this.vy) * 0.08;
+          }
         }
       }
 
@@ -54,12 +109,35 @@ const HeroSection = () => {
         if (!ctx) return;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
+        
+        if (this.isBurst) {
+          // Adjust opacity for fade out
+          const match = this.color.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([0-9.]+)\)/);
+          if (match) {
+            const [, r, g, b, a] = match;
+            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${parseFloat(a) * this.life})`;
+          } else {
+            ctx.fillStyle = this.color;
+          }
+          ctx.shadowBlur = 4 * this.life;
+        } else {
+          ctx.fillStyle = this.color;
+          ctx.shadowBlur = 3;
+        }
+        ctx.shadowColor = this.color;
         ctx.fill();
+        ctx.shadowBlur = 0;
       }
     }
 
-    const particles: Particle[] = Array.from({ length: 60 }, () => new Particle());
+    // Dynamic density scaling based on window dimensions
+    const getParticleCount = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      return Math.min(130, Math.max(30, Math.floor((w * h) / 15000)));
+    };
+
+    let particles: Particle[] = Array.from({ length: getParticleCount() }, () => new Particle());
     const mouse = { x: -1000, y: -1000 };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -72,33 +150,93 @@ const HeroSection = () => {
       mouse.y = -1000;
     };
 
+    const handleMouseClick = (e: MouseEvent) => {
+      const clickX = e.clientX;
+      const clickY = e.clientY;
+
+      // 1. Spawn 14 tiny burst particles that scatter outwards
+      const burstCount = 14;
+      for (let i = 0; i < burstCount; i++) {
+        particles.push(new Particle(clickX, clickY, true));
+      }
+
+      // 2. Push existing (non-burst) particles away from the click point
+      const shockwaveRadius = 220;
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        if (p.isBurst) continue;
+
+        const dx = p.x - clickX;
+        const dy = p.y - clickY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < shockwaveRadius) {
+          const force = (shockwaveRadius - dist) / shockwaveRadius;
+          const angle = Math.atan2(dy, dx);
+          // Apply a sudden impulse to velocity
+          p.vx += Math.cos(angle) * force * 6.5;
+          p.vy += Math.sin(angle) * force * 6.5;
+        }
+      }
+    };
+
     const handleResize = () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
+      particles = Array.from({ length: getParticleCount() }, () => new Particle());
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('click', handleMouseClick);
     window.addEventListener('resize', handleResize);
 
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
 
+      // Filter out dead particles
+      particles = particles.filter(p => !p.isBurst || p.life > 0);
+
+      // 1. Draw web links between particles
       for (let i = 0; i < particles.length; i++) {
         particles[i].update(mouse);
         particles[i].draw();
 
+        if (particles[i].isBurst) continue;
+
         for (let j = i + 1; j < particles.length; j++) {
+          if (particles[j].isBurst) continue;
+
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 110) {
+          if (dist < 120) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(45, 138, 138, ${0.12 * (1 - dist / 110)})`;
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = `rgba(56, 189, 248, ${0.2 * (1 - dist / 120)})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // 2. Draw connections to mouse
+      if (mouse.x > -1000 && mouse.y > -1000) {
+        for (let i = 0; i < particles.length; i++) {
+          if (particles[i].isBurst) continue;
+
+          const dx = particles[i].x - mouse.x;
+          const dy = particles[i].y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 160) {
+            ctx.beginPath();
+            ctx.moveTo(mouse.x, mouse.y);
+            ctx.lineTo(particles[i].x, particles[i].y);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${0.35 * (1 - dist / 160)})`;
+            ctx.lineWidth = 0.8;
             ctx.stroke();
           }
         }
@@ -113,6 +251,7 @@ const HeroSection = () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('click', handleMouseClick);
       window.removeEventListener('resize', handleResize);
     };
   }, []);
@@ -128,7 +267,7 @@ const HeroSection = () => {
     <section id="hero" className="min-h-[100svh] flex items-center relative overflow-hidden pt-24 sm:pt-28">
       {/* Animated gradient background with canvas particles */}
       <div className="absolute inset-0 gradient-hero">
-        <canvas id="hero-particles" className="absolute inset-0 w-full h-full opacity-55 mix-blend-screen" />
+        <canvas id="hero-particles" className="absolute inset-0 w-full h-full opacity-85 mix-blend-screen" />
         <div className="absolute inset-0 bg-black/35"></div>
       </div>
 
@@ -162,9 +301,9 @@ const HeroSection = () => {
               asChild
               className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-white shadow-glow hover:shadow-glow-lg transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 min-w-[180px]"
             >
-              <a href={`mailto:${CONTACT_EMAIL}?subject=Resume%20request`}>
+              <a href="/Sai_Santhosh_Gaddam_Resume.pdf" target="_blank" rel="noopener noreferrer">
                 <FileText className="mr-2" />
-                Request Resume
+                View Resume
               </a>
             </Button>
             <Button
