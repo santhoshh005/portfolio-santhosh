@@ -287,7 +287,7 @@ const HeroSection = () => {
           <h1 className="text-[clamp(2.5rem,8vw,5.5rem)] font-bold mb-5 animate-fade-in leading-tight text-balance">
             Hi, I'm{' '}
             <span className="bg-gradient-to-r from-accent to-blue-300 bg-clip-text text-transparent">
-              Sai Santhosh
+              Santhosh
             </span>
           </h1>
 
