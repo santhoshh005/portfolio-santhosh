@@ -280,9 +280,10 @@ const HeroSection = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-5xl mx-auto text-center text-white">
-          <p className="text-sm md:text-base uppercase tracking-[0.3em] text-accent-foreground/80 mb-4 animate-fade-in">
-            Welcome to my portfolio
-          </p>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/20 border border-accent/40 text-teal-300 text-xs sm:text-sm font-semibold tracking-wider uppercase mb-5 animate-fade-in backdrop-blur-md shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" aria-hidden="true" />
+            Full-Stack Developer · VIT Vellore
+          </div>
           <h1 className="text-[clamp(2.5rem,8vw,5.5rem)] font-bold mb-5 animate-fade-in leading-tight text-balance">
             Hi, I'm{' '}
             <span className="bg-gradient-to-r from-accent to-blue-300 bg-clip-text text-transparent">
@@ -290,8 +291,8 @@ const HeroSection = () => {
             </span>
           </h1>
 
-          <p className="text-base md:text-lg mb-10 text-gray-300 max-w-2xl mx-auto animate-fade-in animate-fade-in-delay-1 leading-relaxed">
-            Passionate about software development, full-stack engineering, and emerging technologies. I build scalable applications, explore innovative solutions, and transform ideas into seamless digital experiences.
+          <p className="text-base md:text-lg mb-10 text-gray-200 max-w-2xl mx-auto animate-fade-in animate-fade-in-delay-1 leading-relaxed">
+            I build full-stack web apps and browser extensions, from React interfaces to secure backends. My autofill extension is live on the Edge Add-ons store, and I’m always shipping something new.
           </p>
 
           {/* CTA Buttons */}
