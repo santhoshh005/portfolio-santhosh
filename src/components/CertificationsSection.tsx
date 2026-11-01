@@ -3,23 +3,18 @@ import { Card, CardContent } from '@/components/ui/card';
 
 const certifications = [
   {
-    title: "GenAI Powered Data Analytics Job Simulation",
-    issuer: "Tata",
+    title: "Health-a-thon 2026: Inpatient Oncology AI Copilot",
+    issuer: "Health-a-thon",
     date: "2026"
   },
   {
-    title: "Java Spring Boot",
-    issuer: "Infosys Springboard",
+    title: "Smart India Hackathon 2026: MoES / IMD AI",
+    issuer: "Ministry of Earth Sciences / IMD",
     date: "2026"
   },
   {
-    title: "Data Analytics Job Simulation",
-    issuer: "Deloitte Australia",
-    date: "2026"
-  },
-  {
-    title: "AWS Cloud Practitioner Essentials",
-    issuer: "Amazon Web Services",
+    title: "Published Product: Smart Autofill on Edge Store",
+    issuer: "Microsoft Edge Addons Store",
     date: "2026"
   },
   {
@@ -28,19 +23,24 @@ const certifications = [
     date: "2026"
   },
   {
+    title: "AWS Cloud Practitioner Essentials",
+    issuer: "Amazon Web Services (AWS)",
+    date: "2026"
+  },
+  {
+    title: "Java Spring Boot Certification",
+    issuer: "Infosys Springboard",
+    date: "2026"
+  },
+  {
     title: "Software Engineering Job Simulation",
     issuer: "JPMorganChase",
     date: "2026"
   },
   {
-    title: "AI For Beginners",
-    issuer: "HP LIFE",
-    date: "2025"
-  },
-  {
-    title: "Fusion 360 Workshop",
-    issuer: "Autodesk",
-    date: "2024"
+    title: "GenAI Powered Data Analytics Simulation",
+    issuer: "Tata",
+    date: "2026"
   }
 ];
 
@@ -55,11 +55,11 @@ const CertificationsSection = () => {
           {/* Section Heading */}
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-primary mb-3 text-balance">
-              Professional Certifications
+              Honors &amp; Certifications
             </h2>
             <div className="w-20 h-1 bg-accent mx-auto mb-4"></div>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-              Industry credentials and project simulation completions.
+              Hackathon achievements, published software, and professional certifications.
             </p>
           </div>
 

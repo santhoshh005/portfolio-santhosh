@@ -5,27 +5,27 @@ const skillCategories = [
   {
     icon: <Code2 className="w-5 h-5 text-accent" />,
     title: 'Languages',
-    skills: ['Java', 'Python', 'JavaScript', 'TypeScript', 'C / C++', 'SQL', 'Bash'],
+    skills: ['Python', 'TypeScript', 'JavaScript', 'Java', 'C / C++', 'SQL', 'Bash'],
   },
   {
     icon: <Layout className="w-5 h-5 text-accent" />,
-    title: 'Frontend & Web Dev',
-    skills: ['Web Development', 'React', 'HTML5', 'CSS3', 'Tailwind CSS', 'Vite', 'Context API', 'Chart.js'],
+    title: 'Frontend & Web',
+    skills: ['Next.js 16/15', 'React 19/18', 'Tailwind CSS', 'Vite', 'HTML5', 'CSS3', 'WebSockets', 'Context API'],
   },
   {
     icon: <Server className="w-5 h-5 text-accent" />,
-    title: 'Backend & Databases',
-    skills: ['Node.js', 'Express', 'MongoDB', 'REST APIs', 'Web APIs', 'Local Storage'],
+    title: 'Backend & Cloud',
+    skills: ['FastAPI', 'Node.js', 'Express', 'Supabase (PostgreSQL / RLS)', 'Prisma', 'Docker', 'SSE', 'REST APIs'],
   },
   {
     icon: <Brain className="w-5 h-5 text-accent" />,
-    title: 'AI & Data Science',
-    skills: ['Machine Learning', 'Pandas', 'NumPy', 'Scikit-learn', 'XGBoost', 'LightGBM', 'Jupyter Notebook'],
+    title: 'AI & Machine Learning',
+    skills: ['Gemini API (Multimodal)', 'Whisper AI', 'Scikit-learn', 'Autoencoders', 'TreeSHAP', 'Pandas', 'NumPy'],
   },
   {
     icon: <Wrench className="w-5 h-5 text-accent" />,
-    title: 'Fundamentals & Tools',
-    skills: ['Algorithms', 'Data Structures', 'OOP', 'SOLID Principles', 'Git', 'GitHub', 'Jenkins', 'Vibe Coding', 'Manifest V3', 'Web Crypto', 'PDF.js'],
+    title: 'DevTools & Testing',
+    skills: ['Git', 'GitHub Actions', 'Octokit', 'Web Crypto API', 'Vitest', 'Playwright', 'Pytest', 'Manifest V3', 'Linux'],
   },
 ];
 

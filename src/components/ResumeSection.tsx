@@ -1,29 +1,58 @@
 import { Briefcase, GraduationCap, Calendar, MapPin } from 'lucide-react';
 
-const experience = [
+interface TimelineItem {
+  role?: string;
+  degree?: string;
+  company?: string;
+  institution?: string;
+  duration: string;
+  location: string;
+  description?: string;
+  bullets?: string[];
+}
+
+const experience: TimelineItem[] = [
   {
     role: "Web Development Intern",
     company: "InAmigos Foundation (IAF)",
-    duration: "June 2026 - Present",
+    duration: "Jun 2026 – Jul 2026",
     location: "India",
-    description: "Developing and maintaining web applications, working on frontend interfaces."
+    bullets: [
+      "Audited live website UI/UX workflows, suggesting structural usability and layout improvements.",
+      "Designed page redesign mockups in Figma and collected structured data across partner NGOs."
+    ]
   },
   {
     role: "Full-Stack Web Development Intern",
     company: "Thiranex",
-    duration: "June 2026 - Present",
+    duration: "May 2026 – Jun 2026",
     location: "India",
-    description: "Developing responsive full-stack web applications, integrating modern API solutions, and crafting clean, user-centric interfaces."
+    bullets: [
+      "Completed project-driven full-stack internship, delivering assigned milestones in React and Node.js.",
+      "Built and hosted full-stack applications including an e-commerce platform and live portfolio."
+    ]
   }
 ];
 
-const education = [
+const education: TimelineItem[] = [
   {
-    degree: "Integrated M.Tech Software Engineering",
+    degree: "Integrated M.Tech in Software Engineering",
     institution: "Vellore Institute of Technology (VIT)",
-    duration: "2023 - 2028",
+    duration: "2023 – 2028 (Expected)",
     location: "Vellore, Tamil Nadu, India",
-    description: "Specializing in Software Engineering and CSE fundamentals, design patterns, algorithms, and full-stack development."
+    bullets: [
+      "CGPA: 8.91/10",
+      "Specialization: Software Engineering, Computer Science fundamentals, Object-Oriented Programming (OOP), and Data Structures."
+    ]
+  },
+  {
+    degree: "Intermediate (Class XII) – MPC",
+    institution: "Narayana Junior College (BIEAP)",
+    duration: "Sep 2021 – Mar 2023",
+    location: "Anantapur, Andhra Pradesh, India",
+    bullets: [
+      "Board of Intermediate Education, AP — Secured a score of 97.30%."
+    ]
   }
 ];
 
@@ -75,9 +104,19 @@ const ResumeSection = () => {
                         <MapPin className="w-3.5 h-3.5" />
                         {item.location}
                       </p>
-                      <p className="text-sm text-muted-foreground leading-relaxed mt-2">
-                        {item.description}
-                      </p>
+                      {item.bullets ? (
+                        <ul className="list-disc pl-4 space-y-1.5 mt-2 text-sm text-muted-foreground leading-relaxed">
+                          {item.bullets.map((b, bi) => (
+                            <li key={bi} className="hover:text-foreground transition-colors duration-200">
+                              {b}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="text-sm text-muted-foreground leading-relaxed mt-2">
+                          {item.description}
+                        </p>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -111,9 +150,19 @@ const ResumeSection = () => {
                         <MapPin className="w-3.5 h-3.5" />
                         {item.location}
                       </p>
-                      <p className="text-sm text-muted-foreground leading-relaxed mt-2">
-                        {item.description}
-                      </p>
+                      {item.bullets ? (
+                        <ul className="list-disc pl-4 space-y-1.5 mt-2 text-sm text-muted-foreground leading-relaxed">
+                          {item.bullets.map((b, bi) => (
+                            <li key={bi} className="hover:text-foreground transition-colors duration-200">
+                              {b}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="text-sm text-muted-foreground leading-relaxed mt-2">
+                          {item.description}
+                        </p>
+                      )}
                     </div>
                   </div>
                 ))}
