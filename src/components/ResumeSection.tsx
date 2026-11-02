@@ -58,7 +58,7 @@ const education: TimelineItem[] = [
 
 const ResumeSection = () => {
   return (
-    <section id="resume" className="py-20 sm:py-24 bg-background relative overflow-hidden">
+    <section id="resume" className="py-14 sm:py-16 bg-background relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute top-1/3 -right-20 w-72 h-72 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-1/3 -left-20 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -66,7 +66,7 @@ const ResumeSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Section Heading */}
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-10 sm:mb-12 animate-fade-in">
             <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-primary mb-3 text-balance">
               Education &amp; Experience
             </h2>

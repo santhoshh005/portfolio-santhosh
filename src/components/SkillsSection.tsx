@@ -10,22 +10,22 @@ const skillCategories = [
   {
     icon: <Layout className="w-5 h-5 text-accent" />,
     title: 'Frontend & Web',
-    skills: ['Next.js 16/15', 'React 19/18', 'Tailwind CSS', 'Vite', 'HTML5', 'CSS3', 'WebSockets', 'Context API'],
+    skills: ['Next.js', 'React', 'Tailwind CSS', 'Vite', 'HTML', 'CSS', 'WebSockets', 'Context API'],
   },
   {
     icon: <Server className="w-5 h-5 text-accent" />,
     title: 'Backend & Cloud',
-    skills: ['FastAPI', 'Node.js', 'Express', 'Supabase (PostgreSQL / RLS)', 'Prisma', 'Docker', 'SSE', 'REST APIs'],
+    skills: ['FastAPI', 'Node.js', 'Express', 'PostgreSQL', 'Supabase', 'Prisma', 'Docker', 'REST APIs'],
   },
   {
     icon: <Brain className="w-5 h-5 text-accent" />,
     title: 'AI & Machine Learning',
-    skills: ['Gemini API (Multimodal)', 'Whisper AI', 'Scikit-learn', 'Autoencoders', 'TreeSHAP', 'Pandas', 'NumPy'],
+    skills: ['Gemini API', 'Whisper AI', 'Scikit-learn', 'Autoencoders', 'TreeSHAP', 'Pandas', 'NumPy'],
   },
   {
     icon: <Wrench className="w-5 h-5 text-accent" />,
     title: 'DevTools & Testing',
-    skills: ['Git', 'GitHub Actions', 'Octokit', 'Web Crypto API', 'Vitest', 'Playwright', 'Pytest', 'Manifest V3', 'Linux'],
+    skills: ['Git', 'GitHub Actions', 'Octokit', 'Web Crypto API', 'Vitest', 'Playwright', 'Pytest', 'Linux'],
   },
 ];
 
@@ -48,7 +48,7 @@ const SkillsSection = () => {
   };
 
   return (
-    <section id="skills" className="py-20 sm:py-24 bg-background">
+    <section id="skills" className="py-14 sm:py-16 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10 animate-fade-in">

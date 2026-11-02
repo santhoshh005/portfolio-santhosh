@@ -1,5 +1,5 @@
 import { useMemo, useState, useEffect } from 'react';
-import { ExternalLink, Sparkles, X } from 'lucide-react';
+import { ExternalLink, X } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -171,14 +171,10 @@ const ProjectsSection = () => {
   }, [active, selectedTech]);
 
   return (
-    <section id="projects" className="py-20 sm:py-24 bg-secondary relative overflow-hidden">
+    <section id="projects" className="py-14 sm:py-16 bg-secondary relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10 animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-medium mb-3">
-              <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
-              Portfolio
-            </div>
             <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-primary mb-3 text-balance">Featured Projects</h2>
             <div className="w-20 h-1 bg-accent mx-auto mb-4"></div>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto">

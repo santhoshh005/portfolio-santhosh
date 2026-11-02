@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { ArrowDown, Github, Linkedin, Mail, Instagram, FileText } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail, FileText, Code2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const CONTACT_EMAIL = import.meta.env.VITE_CONTACT_EMAIL ?? 'saisanthosh05012006@gmail.com';
@@ -280,9 +280,22 @@ const HeroSection = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-5xl mx-auto text-center text-white">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/20 border border-accent/40 text-teal-300 text-xs sm:text-sm font-semibold tracking-wider uppercase mb-5 animate-fade-in backdrop-blur-md shadow-sm">
+          {/* Circular Profile Avatar */}
+          <div className="relative mx-auto mb-6 w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-tr from-accent via-teal-400 to-blue-400 shadow-glow animate-fade-in group">
+            <div className="w-full h-full rounded-full overflow-hidden border-2 border-background/80 bg-card">
+              <img
+                src="/profile.jpg"
+                alt="Sai Santhosh"
+                width={160}
+                height={160}
+                className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          </div>
+
+          <div className="inline-flex items-center justify-center text-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-accent/20 border border-accent/40 text-teal-300 text-[10.5px] sm:text-xs md:text-sm font-semibold tracking-normal sm:tracking-wider uppercase mb-5 animate-fade-in backdrop-blur-md shadow-sm max-w-full">
             <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" aria-hidden="true" />
-            Full-Stack Developer · VIT Vellore
+            FULL-STACK DEVELOPER · APPLIED AI · VIT VELLORE
           </div>
           <h1 className="text-[clamp(2.5rem,8vw,5.5rem)] font-bold mb-5 animate-fade-in leading-tight text-balance">
             Hi, I'm{' '}
@@ -291,21 +304,25 @@ const HeroSection = () => {
             </span>
           </h1>
 
-          <p className="text-base md:text-lg mb-10 text-gray-200 max-w-2xl mx-auto animate-fade-in animate-fade-in-delay-1 leading-relaxed">
-            I build full-stack web apps and browser extensions, from React interfaces to secure backends. My autofill extension is live on the Edge Add-ons store, and I’m always shipping something new.
+          <p className="text-base md:text-lg mb-5 text-gray-200 max-w-2xl mx-auto animate-fade-in animate-fade-in-delay-1 leading-relaxed">
+            I build and ship full-stack web applications and browser extensions, combining React and TypeScript interfaces with secure backend systems. My Smart Autofill extension is published on Microsoft Edge Add-ons.
           </p>
+
+          {/* Availability Indicator */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs sm:text-sm font-medium mb-8 animate-fade-in animate-fade-in-delay-1 backdrop-blur-sm shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
+            <span>Open to Software Engineering Internships</span>
+          </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center mb-10 animate-fade-in animate-fade-in-delay-2">
             <Button
               size="lg"
-              asChild
+              onClick={() => scrollToSection('projects')}
               className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-white shadow-glow hover:shadow-glow-lg transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 min-w-[180px]"
             >
-              <a href="/Sai_Santhosh_Gaddam_Resume.pdf" target="_blank" rel="noopener noreferrer">
-                <FileText className="mr-2" />
-                View Resume
-              </a>
+              <Code2 className="mr-2 w-4 h-4" />
+              View Projects
             </Button>
             <Button
               variant="outline"
@@ -313,17 +330,19 @@ const HeroSection = () => {
               onClick={() => scrollToSection('contact')}
               className="w-full sm:w-auto border-white/50 text-white bg-white/5 hover:bg-white/15 hover:border-white/70 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 min-w-[180px]"
             >
+              <Mail className="mr-2 w-4 h-4" />
               Get In Touch
             </Button>
           </div>
 
           {/* Social Links */}
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-5 mb-12 animate-fade-in animate-fade-in-delay-2">
+          <div className="flex flex-wrap justify-center gap-5 sm:gap-6 mb-12 animate-fade-in animate-fade-in-delay-2">
             <a
               href="https://github.com/santhoshh005"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="GitHub"
+              aria-label="GitHub Profile"
+              title="GitHub"
               className="text-white/70 hover:text-accent transition-transform duration-300 hover:scale-110 focus-visible:scale-110"
             >
               <Github size={22} />
@@ -332,23 +351,16 @@ const HeroSection = () => {
               href="https://www.linkedin.com/in/sai-santhosh-07603828b"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn"
+              aria-label="LinkedIn Profile"
+              title="LinkedIn"
               className="text-white/70 hover:text-accent transition-transform duration-300 hover:scale-110 focus-visible:scale-110"
             >
               <Linkedin size={22} />
             </a>
             <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="text-white/70 hover:text-accent transition-transform duration-300 hover:scale-110 focus-visible:scale-110"
-            >
-              <Instagram size={22} />
-            </a>
-            <a
               href={`mailto:${CONTACT_EMAIL}`}
-              aria-label="Email"
+              aria-label="Send Email"
+              title="Email"
               className="text-white/70 hover:text-accent transition-transform duration-300 hover:scale-110 focus-visible:scale-110"
             >
               <Mail size={22} />

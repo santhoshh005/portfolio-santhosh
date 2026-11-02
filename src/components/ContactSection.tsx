@@ -192,10 +192,10 @@ Sent At: ${formattedTime}`;
   };
 
   return (
-    <section id="contact" className="py-20 sm:py-24 bg-background">
+    <section id="contact" className="py-14 sm:py-16 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-10 sm:mb-12">
             <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-primary mb-3 text-balance">
               Let's Connect
             </h2>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, MoonStar, SunMedium, X } from 'lucide-react';
+import { Menu, MoonStar, SunMedium, X, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useTheme } from 'next-themes';
@@ -42,7 +42,7 @@ const Navigation = () => {
           }
         });
       },
-      { rootMargin: '-40% 0px -40% 0px', threshold: 0.1 }
+      { rootMargin: '-25% 0px -45% 0px', threshold: 0.1 }
     );
 
     navItems.forEach((item) => {
@@ -92,8 +92,8 @@ const Navigation = () => {
             Sai Santhosh
           </button>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
+          {/* Desktop Navigation - Centered Menu Links */}
+          <div className="hidden lg:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
             {navItems.map((item) => {
               const isActive = activeSection === item.section;
               return (
@@ -102,11 +102,11 @@ const Navigation = () => {
                   onClick={() => scrollToSection(item.section)}
                   aria-current={isActive ? 'page' : undefined}
                   className={cn(
-                    'inline-flex h-10 items-center px-4 rounded-lg text-sm font-medium transition-all duration-300',
+                    'inline-flex h-9 items-center px-3 rounded-lg text-sm font-medium transition-all duration-300',
                     isActive
                       ? isScrolled
-                        ? 'text-accent bg-accent/10'
-                        : 'text-white bg-white/15'
+                        ? 'text-accent bg-accent/10 font-semibold'
+                        : 'text-white bg-white/15 font-semibold'
                       : isScrolled
                         ? 'text-foreground hover:text-accent hover:bg-accent/5'
                         : 'text-white/85 hover:text-white hover:bg-white/10'
@@ -116,6 +116,25 @@ const Navigation = () => {
                 </button>
               );
             })}
+          </div>
+
+          {/* Resume button centered in the middle between Contact and the dark/light mode icon */}
+          <div className="hidden lg:flex items-center justify-center absolute left-[calc(50%+305px)] right-14 sm:right-16 h-full pointer-events-none">
+            <Button
+              asChild
+              size="sm"
+              className={cn(
+                'pointer-events-auto h-9 px-4 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all duration-300 shadow-sm',
+                isScrolled
+                  ? 'bg-accent hover:bg-accent/90 text-white shadow-glow'
+                  : 'bg-accent hover:bg-accent/90 text-white shadow-glow'
+              )}
+            >
+              <a href="/Sai_Santhosh_Gaddam_Resume.pdf" target="_blank" rel="noopener noreferrer">
+                <FileText className="w-3.5 h-3.5 mr-1.5" />
+                Resume
+              </a>
+            </Button>
           </div>
 
           <div className="flex items-center gap-2">
@@ -141,7 +160,7 @@ const Navigation = () => {
               variant="ghost"
               size="sm"
               className={cn(
-                'md:hidden h-10 w-10 transition-colors duration-300',
+                'lg:hidden h-10 w-10 transition-colors duration-300',
                 isScrolled
                   ? 'text-foreground hover:bg-accent/10 hover:text-accent'
                   : 'text-white hover:bg-white/10 hover:text-white'
@@ -160,7 +179,7 @@ const Navigation = () => {
         {isMobileMenuOpen && (
           <div
             id="mobile-navigation"
-            className="md:hidden mt-3 rounded-2xl border border-border/60 bg-background/95 p-2 shadow-elegant backdrop-blur-xl animate-fade-in"
+            className="lg:hidden mt-3 rounded-2xl border border-border/60 bg-background/95 p-3 shadow-elegant backdrop-blur-xl animate-fade-in space-y-1"
           >
             {navItems.map((item) => (
               <button
@@ -168,15 +187,28 @@ const Navigation = () => {
                 onClick={() => scrollToSection(item.section)}
                 aria-current={activeSection === item.section ? 'page' : undefined}
                 className={cn(
-                  'block w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300',
+                  'block w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300',
                   activeSection === item.section
-                    ? 'text-accent bg-accent/10'
+                    ? 'text-accent bg-accent/10 font-semibold'
                     : 'text-foreground hover:text-accent hover:bg-accent/5'
                 )}
               >
                 {item.label}
               </button>
             ))}
+
+            {/* Mobile Resume view button */}
+            <div className="pt-2 border-t border-border/50">
+              <Button
+                asChild
+                className="w-full bg-accent hover:bg-accent/90 text-white rounded-xl h-10 text-sm font-semibold shadow-glow"
+              >
+                <a href="/Sai_Santhosh_Gaddam_Resume.pdf" target="_blank" rel="noopener noreferrer">
+                  <FileText className="w-4 h-4 mr-2" />
+                  View Resume
+                </a>
+              </Button>
+            </div>
           </div>
         )}
       </div>

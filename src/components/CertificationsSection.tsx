@@ -18,13 +18,18 @@ const certifications = [
     date: "2026"
   },
   {
-    title: "Agentic AI Certified Foundations Associate",
-    issuer: "Oracle",
+    title: "GitHub Copilot Agent Mode",
+    issuer: "Microsoft",
     date: "2026"
   },
   {
     title: "Advanced Generative AI",
-    issuer: "IBM Career Education Program",
+    issuer: "IBM",
+    date: "2026"
+  },
+  {
+    title: "Agentic AI Certified Associate",
+    issuer: "Oracle",
     date: "2026"
   },
   {
@@ -33,32 +38,22 @@ const certifications = [
     date: "2026"
   },
   {
-    title: "Building Applications with GitHub Copilot Agent Mode",
-    issuer: "Microsoft",
-    date: "2026"
-  },
-  {
     title: "Java Spring Boot Certification",
     issuer: "Infosys Springboard",
-    date: "2026"
-  },
-  {
-    title: "Software Engineering Job Simulation",
-    issuer: "JPMorganChase",
     date: "2026"
   }
 ];
 
 const CertificationsSection = () => {
   return (
-    <section id="certifications" className="py-20 sm:py-24 bg-secondary relative overflow-hidden">
+    <section id="certifications" className="py-14 sm:py-16 bg-secondary relative overflow-hidden">
       {/* Background glow orb */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           {/* Section Heading */}
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-10 sm:mb-12 animate-fade-in">
             <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-primary mb-3 text-balance">
               Honors &amp; Certifications
             </h2>
@@ -69,7 +64,7 @@ const CertificationsSection = () => {
           </div>
 
           {/* Certifications Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {certifications.map((cert, idx) => (
               <Card 
                 key={idx} 
