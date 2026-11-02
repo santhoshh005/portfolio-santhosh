@@ -18,13 +18,23 @@ const certifications = [
     date: "2026"
   },
   {
-    title: "Building with GitHub Copilot Agent Mode",
-    issuer: "Microsoft",
+    title: "Agentic AI Certified Foundations Associate",
+    issuer: "Oracle",
+    date: "2026"
+  },
+  {
+    title: "Advanced Generative AI",
+    issuer: "IBM Career Education Program",
     date: "2026"
   },
   {
     title: "AWS Cloud Practitioner Essentials",
     issuer: "Amazon Web Services (AWS)",
+    date: "2026"
+  },
+  {
+    title: "Building Applications with GitHub Copilot Agent Mode",
+    issuer: "Microsoft",
     date: "2026"
   },
   {
@@ -35,11 +45,6 @@ const certifications = [
   {
     title: "Software Engineering Job Simulation",
     issuer: "JPMorganChase",
-    date: "2026"
-  },
-  {
-    title: "GenAI Powered Data Analytics Simulation",
-    issuer: "Tata",
     date: "2026"
   }
 ];
@@ -64,7 +69,7 @@ const CertificationsSection = () => {
           </div>
 
           {/* Certifications Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {certifications.map((cert, idx) => (
               <Card 
                 key={idx} 
