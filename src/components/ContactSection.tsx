@@ -35,8 +35,17 @@ const ContactSection = () => {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
 
-  const handleCopy = (text: string, type: 'email' | 'phone') => {
-    navigator.clipboard.writeText(text);
+  const handleCopy = async (text: string, type: 'email' | 'phone') => {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      toast({
+        title: 'Copy failed',
+        description: `Your browser blocked clipboard access. ${type === 'email' ? 'Email' : 'Phone'}: ${text}`,
+        variant: 'destructive',
+      });
+      return;
+    }
     if (type === 'email') {
       setCopiedEmail(true);
       setTimeout(() => setCopiedEmail(false), 2000);

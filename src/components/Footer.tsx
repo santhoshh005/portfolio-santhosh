@@ -40,7 +40,7 @@ const Footer = () => {
             <Heart className="w-3 h-3 text-red-400 fill-current" aria-hidden="true" />
             <span>Designed for performance and clarity</span>
           </div>
-          <p>Available for freelance work and full-time opportunities</p>
+          <p>Open to software engineering internships</p>
         </div>
       </div>
     </footer>

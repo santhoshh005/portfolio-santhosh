@@ -151,6 +151,7 @@ const HeroSection = () => {
     };
 
     const handleMouseClick = (e: MouseEvent) => {
+      if (!isVisible) return;
       const clickX = e.clientX;
       const clickY = e.clientY;
 
@@ -242,12 +243,29 @@ const HeroSection = () => {
         }
       }
 
-      animationFrameId = requestAnimationFrame(animate);
+      if (isVisible && !prefersReducedMotion) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
     };
+
+    // Only run the animation loop while the hero is on screen, and draw a
+    // single static frame for visitors who prefer reduced motion.
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let isVisible = true;
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      const wasVisible = isVisible;
+      isVisible = entry.isIntersecting;
+      if (isVisible && !wasVisible && !prefersReducedMotion) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    });
+    visibilityObserver.observe(canvas);
 
     animate();
 
     return () => {
+      visibilityObserver.disconnect();
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
@@ -305,7 +323,7 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-base md:text-lg mb-5 text-gray-200 max-w-2xl mx-auto animate-fade-in animate-fade-in-delay-1 leading-relaxed">
-            I build and ship full-stack web applications and browser extensions, combining React and TypeScript interfaces with secure backend systems. My Smart Autofill extension is published on Microsoft Edge Add-ons.
+            I build full stack web apps, browser extensions and applied AI tools with React, TypeScript and Python. My Smart Autofill extension is live on Microsoft Edge Add-ons.
           </p>
 
           {/* Availability Indicator */}
@@ -336,7 +354,7 @@ const HeroSection = () => {
           </div>
 
           {/* Social Links */}
-          <div className="flex flex-wrap justify-center gap-5 sm:gap-6 mb-12 animate-fade-in animate-fade-in-delay-2">
+          <div className="flex flex-wrap justify-center gap-5 sm:gap-6 mb-8 animate-fade-in animate-fade-in-delay-2">
             <a
               href="https://github.com/santhoshh005"
               target="_blank"
@@ -370,7 +388,7 @@ const HeroSection = () => {
           <button
             onClick={() => scrollToSection('about')}
             aria-label="Scroll to About"
-            className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 text-white/70 hover:text-accent transition-smooth animate-bounce"
+            className="mx-auto mb-6 flex text-white/70 hover:text-accent transition-smooth animate-bounce motion-reduce:animate-none"
           >
             <ArrowDown size={24} />
           </button>

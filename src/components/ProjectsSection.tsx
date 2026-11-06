@@ -23,7 +23,7 @@ interface Project {
 const projects: Project[] = [
   {
     title: 'RoundsAI — Oncology Ward Copilot',
-    badge: '🏆 Health-a-thon 2026',
+    badge: 'Health-a-thon 2026 Project',
     description:
       'Clinical intelligence copilot built with BMCRI oncologists. Transcribes bedside voice dictation on-device with zero cloud audio leakage and automates CTCAE v5.0 toxicity grading.',
     image:
@@ -73,7 +73,7 @@ const projects: Project[] = [
   },
   {
     title: 'SkyGuard AI — Weather Anomaly Detection',
-    badge: '🏆 SIH 2026 · MoES / IMD',
+    badge: 'SIH 2026 · MoES / IMD',
     description:
       'Automated anomaly detection, telemetry correction, and sensor health platform engineered for the Indian Meteorological Department (IMD) Automatic Weather Stations.',
     image:
@@ -128,8 +128,8 @@ const filters: Category[] = ['All', 'AI Projects', 'Web Development', 'Full Stac
 const stats = [
   { value: '6', label: 'Featured Projects' },
   { value: '2', label: 'Internships' },
-  { value: 'Active', label: 'Status' },
-  { value: '100%', label: 'Passion For Development' },
+  { value: '8.91', label: 'CGPA at VIT' },
+  { value: '1', label: 'Store Published Extension' },
 ];
 
 const ProjectsSection = () => {
@@ -154,7 +154,7 @@ const ProjectsSection = () => {
       list = list.filter((project) => project.categories.includes(active));
     }
     if (selectedTech) {
-      const searchTerms = selectedTech.toLowerCase().split(/[\/,\s()]+/).filter((term) => term.length > 2);
+      const searchTerms = selectedTech.toLowerCase().split(/[/,\s()]+/).filter((term) => term.length > 2);
       list = list.filter((project) => 
         project.tech.some((t) => {
           const tLower = t.toLowerCase();
