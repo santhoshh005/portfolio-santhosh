@@ -2,46 +2,14 @@ import { Award, Calendar } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
 const certifications = [
-  {
-    title: "Health-a-thon 2026: Inpatient Oncology AI Copilot",
-    issuer: "Health-a-thon",
-    date: "2026"
-  },
-  {
-    title: "Smart India Hackathon 2026: MoES / IMD AI",
-    issuer: "Ministry of Earth Sciences / IMD",
-    date: "2026"
-  },
-  {
-    title: "Published Product: Smart Autofill on Edge Store",
-    issuer: "Microsoft Edge Addons Store",
-    date: "2026"
-  },
-  {
-    title: "GitHub Copilot Agent Mode",
-    issuer: "Microsoft",
-    date: "2026"
-  },
-  {
-    title: "Advanced Generative AI",
-    issuer: "IBM",
-    date: "2026"
-  },
-  {
-    title: "Agentic AI Certified Associate",
-    issuer: "Oracle",
-    date: "2026"
-  },
-  {
-    title: "AWS Cloud Practitioner Essentials",
-    issuer: "Amazon Web Services (AWS)",
-    date: "2026"
-  },
-  {
-    title: "Java Spring Boot Certification",
-    issuer: "Infosys Springboard",
-    date: "2026"
-  }
+  { title: "Published Patent Application: IN202641127062 A1", issuer: "Indian Patent Office", date: "2026" },
+  { title: "Health-a-thon 2026: Top 150, Shortlisted for Phase 2", issuer: "Health-a-thon", date: "2026" },
+  { title: "Smart India Hackathon 2026: Participant (SkyGuard AI)", issuer: "Ministry of Earth Sciences / IMD", date: "2026" },
+  { title: "Published Product: Smart Autofill on Edge (68 Users)", issuer: "Microsoft Edge Add-ons", date: "2026" },
+  { title: "Advanced Generative AI", issuer: "IBM", date: "2026" },
+  { title: "Agentic AI Certified Associate", issuer: "Oracle", date: "2026" },
+  { title: "AWS Cloud Practitioner Essentials", issuer: "Amazon Web Services (AWS)", date: "2026" },
+  { title: "Java Spring Boot Certification", issuer: "Infosys Springboard", date: "2026" }
 ];
 
 const CertificationsSection = () => {

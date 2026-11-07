@@ -15,21 +15,11 @@ const experience: TimelineItem[] = [
   {
     role: "Web Development Intern",
     company: "InAmigos Foundation (IAF)",
-    duration: "Jun 2026 – Jul 2026",
+    duration: "Jun 2026",
     location: "India",
     bullets: [
-      "Audited live website UI/UX workflows, suggesting structural usability and layout improvements.",
-      "Designed page redesign mockups in Figma and collected structured data across partner NGOs."
-    ]
-  },
-  {
-    role: "Full-Stack Web Development Intern",
-    company: "Thiranex",
-    duration: "May 2026 – Jun 2026",
-    location: "India",
-    bullets: [
-      "Completed project-driven full-stack internship, delivering assigned milestones in React and Node.js.",
-      "Built and hosted full-stack applications including an e-commerce platform and live portfolio."
+      "Redesigned the foundation website's landing (hero), login and contributor pages and presented the new design to the team.",
+      "Collected and structured data on 10 partner NGOs and built every redesign mockup in Figma."
     ]
   }
 ];
@@ -42,7 +32,7 @@ const education: TimelineItem[] = [
     location: "Vellore, Tamil Nadu, India",
     bullets: [
       "CGPA: 8.91/10",
-      "Specialization: Software Engineering, Computer Science fundamentals, Object-Oriented Programming (OOP), and Data Structures."
+      "Relevant Coursework: Data Structures & Algorithms, Operating Systems, DBMS, Computer Networks, OOP"
     ]
   },
   {

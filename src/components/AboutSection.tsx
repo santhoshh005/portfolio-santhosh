@@ -1,29 +1,13 @@
-import { GraduationCap, Code, Target, Heart } from 'lucide-react';
+import { GraduationCap, ScrollText, Rocket, HeartPulse } from 'lucide-react';
 
 import { Card, CardContent } from '@/components/ui/card';
 
 const AboutSection = () => {
   const highlights = [
-    {
-      icon: <GraduationCap className="w-6 h-6 text-accent" />,
-      title: "CSE Student",
-      description: "Pursuing Computer Science with passion for innovation"
-    },
-    {
-      icon: <Code className="w-6 h-6 text-accent" />,
-      title: "Full-Stack Dev",
-      description: "Building scalable applications with modern tech"
-    },
-    {
-      icon: <Target className="w-6 h-6 text-accent" />,
-      title: "Problem Solver",
-      description: "Creating solutions that make a real impact"
-    },
-    {
-      icon: <Heart className="w-6 h-6 text-accent" />,
-      title: "Continuous Learner",
-      description: "Always curious, always growing"
-    }
+    { icon: <GraduationCap className="w-6 h-6 text-accent" />, title: "VIT Vellore", description: "Integrated M.Tech in Software Engineering · CGPA 8.91" },
+    { icon: <ScrollText className="w-6 h-6 text-accent" />, title: "Patent Co-inventor", description: "Published Indian patent application IN202641127062 A1" },
+    { icon: <Rocket className="w-6 h-6 text-accent" />, title: "Shipped Product", description: "Smart Autofill live on Microsoft Edge with 68 users" },
+    { icon: <HeartPulse className="w-6 h-6 text-accent" />, title: "Health-a-thon 2026", description: "Top 150 teams with RoundsAI, an oncology ward copilot" }
   ];
 
   return (
@@ -36,8 +20,7 @@ const AboutSection = () => {
             </h2>
             <div className="w-20 h-1 bg-accent mx-auto mb-4"></div>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              CSE student passionate about creating innovative software solutions. 
-              I love turning ideas into reality through clean, efficient code.
+              Software Engineering student at VIT Vellore and co-inventor on a published patent application. I build full-stack apps, AI tools and browser extensions with clean, tested code.
             </p>
           </div>
 

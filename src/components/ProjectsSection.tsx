@@ -22,10 +22,25 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: 'RoundsAI — Oncology Ward Copilot',
-    badge: 'Health-a-thon 2026 Project',
+    title: 'SAME-H — Proof-Bound Document Watermarking',
+    badge: '📜 Patent Published',
     description:
-      'Clinical intelligence copilot built with BMCRI oncologists. Transcribes bedside voice dictation on-device with zero cloud audio leakage and automates CTCAE v5.0 toxicity grading.',
+      'Published Indian patent application (IN202641127062 A1). Co-invented a document-security system that traces a leaked copy back to the exact authorized access.',
+    image:
+      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80',
+    tech: ['Circom', 'SnarkJS (Groth16)', 'Ethereum Smart Contracts', 'Node.js', 'Express', 'PostgreSQL', 'React', 'TypeScript'],
+    features: [
+      'One Poseidon hash binds the ZK access proof, watermark key and on-chain authorization record.',
+      'Leak forensics traces a recovered file to its authorized access, with 5 explicit verdicts.',
+      'AES-256-GCM at rest, Argon2id auth, on-chain replay/expiry checks and org-scoped RBAC.',
+    ],
+    categories: ['Full Stack'],
+  },
+  {
+    title: 'RoundsAI — Oncology Ward Copilot',
+    badge: 'Health-a-thon 2026 · Top 150',
+    description:
+      'Clinical copilot built with a doctor from Victoria Hospital, BMCRI. Transcribes bedside voice dictation on-device with zero cloud audio leakage and automates CTCAE v5.0 toxicity grading.',
     image:
       'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80',
     tech: ['Next.js 15', 'FastAPI', 'Python', 'Gemini 2.5 Flash', 'Whisper AI', 'Supabase', 'TypeScript'],
@@ -40,9 +55,9 @@ const projects: Project[] = [
   },
   {
     title: 'PRPilot — Autonomous AI GitHub App',
-    badge: 'Production Developer Tool',
+    badge: 'Live GitHub App',
     description:
-      'Production-ready GitHub App that auto-analyzes pull requests on open/sync, performs unified diff chunking, flags security flaws, and posts structured inline reviews with risk scores.',
+      'GitHub App that reviews pull requests in 1–2 minutes: unified diff chunking, security flaw detection and structured inline reviews with risk scores.',
     image:
       'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=1200&q=80',
     tech: ['Next.js 16', 'React 19', 'TypeScript', 'Supabase', 'Gemini 3.8 Flash', 'Octokit', 'Vitest', 'Playwright'],
@@ -56,7 +71,7 @@ const projects: Project[] = [
   },
   {
     title: 'Smart Autofill Assistant — Browser Extension',
-    badge: '🚀 Edge Store Published',
+    badge: '🚀 Live on Edge · 68 Users',
     description:
       'Privacy-first Chromium browser extension that eliminates repetitive job application forms by detecting fields dynamically and autofilling on demand from a locally encrypted vault.',
     image:
@@ -126,10 +141,10 @@ const projects: Project[] = [
 const filters: Category[] = ['All', 'AI Projects', 'Web Development', 'Full Stack'];
 
 const stats = [
-  { value: '6', label: 'Featured Projects' },
-  { value: '2', label: 'Internships' },
+  { value: '7', label: 'Featured Projects' },
+  { value: '1', label: 'Published Patent' },
   { value: '8.91', label: 'CGPA at VIT' },
-  { value: '1', label: 'Store Published Extension' },
+  { value: '68', label: 'Extension Users' },
 ];
 
 const ProjectsSection = () => {
@@ -178,7 +193,7 @@ const ProjectsSection = () => {
             <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-primary mb-3 text-balance">Featured Projects</h2>
             <div className="w-20 h-1 bg-accent mx-auto mb-4"></div>
             <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-              A curated selection of production applications, agentic AI tools, and full-stack solutions built with modern technology.
+              A curated selection of patented, published and deployed work: security systems, AI tools and full-stack apps.
             </p>
           </div>
 

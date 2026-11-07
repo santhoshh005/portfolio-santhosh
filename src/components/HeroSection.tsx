@@ -323,7 +323,7 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-base md:text-lg mb-5 text-gray-200 max-w-2xl mx-auto animate-fade-in animate-fade-in-delay-1 leading-relaxed">
-            I build full stack web apps, browser extensions and applied AI tools with React, TypeScript and Python. My Smart Autofill extension is live on Microsoft Edge Add-ons.
+            I build full-stack web apps, browser extensions and applied AI tools with React, TypeScript and Python. I'm a co-inventor on a published patent application, and my Smart Autofill extension is live on Microsoft Edge Add-ons with 68 users.
           </p>
 
           {/* Availability Indicator */}
