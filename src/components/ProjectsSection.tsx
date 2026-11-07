@@ -37,6 +37,23 @@ const projects: Project[] = [
     categories: ['Full Stack'],
   },
   {
+    title: 'Smart Autofill Assistant — Browser Extension',
+    badge: '🚀 Live on Edge · 68 Users',
+    description:
+      'Privacy-first Chromium browser extension that eliminates repetitive job application forms by detecting fields dynamically and autofilling on demand from a locally encrypted vault.',
+    image:
+      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80',
+    tech: ['TypeScript', 'Manifest V3', 'Web Crypto API', 'React', 'Vite', 'PDF.js'],
+    features: [
+      'Local AES-GCM encrypted vault powered by the browser native Web Crypto API.',
+      'Zero server data egress with strict Content Security Policy and no remote code execution.',
+      'Built-in security filter blocking passwords, OTPs, identity numbers, and payment inputs.',
+    ],
+    demo: 'https://microsoftedge.microsoft.com/addons/detail/aelekoeomibgicicopockedkjdcdlmoo',
+    github: 'https://github.com/santhoshh005/Smart-Autofill-Assistant',
+    categories: ['Web Development', 'Full Stack'],
+  },
+  {
     title: 'RoundsAI — Oncology Ward Copilot',
     badge: 'Health-a-thon 2026 · Top 150',
     description:
@@ -70,39 +87,6 @@ const projects: Project[] = [
     categories: ['AI Projects', 'Full Stack', 'Web Development'],
   },
   {
-    title: 'Smart Autofill Assistant — Browser Extension',
-    badge: '🚀 Live on Edge · 68 Users',
-    description:
-      'Privacy-first Chromium browser extension that eliminates repetitive job application forms by detecting fields dynamically and autofilling on demand from a locally encrypted vault.',
-    image:
-      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80',
-    tech: ['TypeScript', 'Manifest V3', 'Web Crypto API', 'React', 'Vite', 'PDF.js'],
-    features: [
-      'Local AES-GCM encrypted vault powered by the browser native Web Crypto API.',
-      'Zero server data egress with strict Content Security Policy and no remote code execution.',
-      'Built-in security filter blocking passwords, OTPs, identity numbers, and payment inputs.',
-    ],
-    demo: 'https://microsoftedge.microsoft.com/addons/detail/aelekoeomibgicicopockedkjdcdlmoo',
-    github: 'https://github.com/santhoshh005/Smart-Autofill-Assistant',
-    categories: ['Web Development', 'Full Stack'],
-  },
-  {
-    title: 'SkyGuard AI — Weather Anomaly Detection',
-    badge: 'SIH 2026 · MoES / IMD',
-    description:
-      'Automated anomaly detection, telemetry correction, and sensor health platform engineered for the Indian Meteorological Department (IMD) Automatic Weather Stations.',
-    image:
-      'https://images.unsplash.com/photo-1590055531615-f16d36ffe8ec?auto=format&fit=crop&w=1200&q=80',
-    tech: ['FastAPI', 'Python', 'React 18', 'Scikit-Learn', 'Isolation Forest', 'Autoencoder', 'Docker'],
-    features: [
-      '3-Channel ML Fusion model (QC + Isolation Forest + Autoencoder) with 94.94% F1-score.',
-      'TreeSHAP explainability translating high-dimensional sensor deviations into plain English.',
-      'Low-latency real-time WebSocket push stream (<2s) with fault simulation test harness.',
-    ],
-    github: 'https://github.com/santhoshh005/Sky_Guard_AI',
-    categories: ['AI Projects', 'Full Stack'],
-  },
-  {
     title: 'PayPilot AI — Conversational Commerce',
     badge: 'Agentic AI · Payments',
     description:
@@ -120,28 +104,27 @@ const projects: Project[] = [
     categories: ['AI Projects', 'Full Stack', 'Web Development'],
   },
   {
-    title: 'Santhosh Storefront — Full-Stack E-Commerce',
-    badge: 'Full-Stack Web App',
+    title: 'SkyGuard AI — Weather Anomaly Detection',
+    badge: 'SIH 2026 · MoES / IMD',
     description:
-      'Modern full-stack online shopping platform featuring dynamic product filtering, persistent shopping cart management, customer order tracking, and a role-based admin dashboard.',
+      'Automated anomaly detection, telemetry correction, and sensor health platform engineered for the Indian Meteorological Department (IMD) Automatic Weather Stations.',
     image:
-      'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&w=1200&q=80',
-    tech: ['Next.js', 'Tailwind CSS', 'Prisma ORM', 'Supabase PostgreSQL', 'JWT Auth'],
+      'https://images.unsplash.com/photo-1590055531615-f16d36ffe8ec?auto=format&fit=crop&w=1200&q=80',
+    tech: ['FastAPI', 'Python', 'React 18', 'Scikit-Learn', 'Isolation Forest', 'Autoencoder', 'Docker'],
     features: [
-      'Modular Next.js API routes with Prisma ORM querying Supabase PostgreSQL database.',
-      'Multi-step checkout flow with customer order status monitoring and admin fulfillment.',
-      'Clean responsive UI with dynamic catalog filters and persistent shopping cart.',
+      '3-Channel ML Fusion model (QC + Isolation Forest + Autoencoder) with 94.94% F1-score.',
+      'TreeSHAP explainability translating high-dimensional sensor deviations into plain English.',
+      'Low-latency real-time WebSocket push stream (<2s) with fault simulation test harness.',
     ],
-    demo: 'https://e-commerce-web-application-sbmi.vercel.app/',
-    github: 'https://github.com/santhoshh005/E-commerce-Web-Application',
-    categories: ['Web Development', 'Full Stack'],
+    github: 'https://github.com/santhoshh005/Sky_Guard_AI',
+    categories: ['AI Projects', 'Full Stack'],
   },
 ];
 
 const filters: Category[] = ['All', 'AI Projects', 'Web Development', 'Full Stack'];
 
 const stats = [
-  { value: '7', label: 'Featured Projects' },
+  { value: '6', label: 'Featured Projects' },
   { value: '1', label: 'Published Patent' },
   { value: '8.91', label: 'CGPA at VIT' },
   { value: '68', label: 'Extension Users' },
