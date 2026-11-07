@@ -25,32 +25,37 @@ const Navigation = () => {
     setMounted(true);
   }, []);
 
+  // One rAF-throttled scroll handler drives both the scrolled style and the active
+  // nav item. The active section is the last one whose top has passed a line 40%
+  // down the viewport, which also works for sections taller than the screen.
   useEffect(() => {
-    const handleScroll = () => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
       setIsScrolled(window.scrollY > 50);
+      const line = window.innerHeight * 0.4;
+      let current = navItems[0].section;
+      for (const item of navItems) {
+        const el = document.getElementById(item.section);
+        if (el && el.getBoundingClientRect().top <= line) current = item.section;
+      }
+      // At the very bottom the last section may never reach the line.
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+        current = navItems[navItems.length - 1].section;
+      }
+      setActiveSection(current);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: '-25% 0px -45% 0px', threshold: 0.1 }
-    );
-
-    navItems.forEach((item) => {
-      const el = document.getElementById(item.section);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   useEffect(() => {

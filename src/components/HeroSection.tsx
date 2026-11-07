@@ -301,13 +301,17 @@ const HeroSection = () => {
           {/* Circular Profile Avatar */}
           <div className="relative mx-auto mb-6 w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-tr from-accent via-teal-400 to-blue-400 shadow-glow animate-fade-in group">
             <div className="w-full h-full rounded-full overflow-hidden border-2 border-background/80 bg-card">
-              <img
-                src="/profile.jpg"
-                alt="Sai Santhosh"
-                width={160}
-                height={160}
-                className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-              />
+              <picture>
+                <source srcSet="/profile.webp" type="image/webp" />
+                <img
+                  src="/profile-320.jpg"
+                  alt="Sai Santhosh Gaddam"
+                  width={160}
+                  height={160}
+                  decoding="async"
+                  className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                />
+              </picture>
             </div>
           </div>
 

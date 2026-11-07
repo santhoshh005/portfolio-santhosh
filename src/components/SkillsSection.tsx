@@ -1,5 +1,8 @@
 import { Code2, Layout, Server, Wrench, Brain } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { projects, projectMatchesTech } from '@/data/projects';
+
+const hasMatchingProject = (skill: string) => projects.some((project) => projectMatchesTech(project, skill));
 
 const skillCategories = [
   {
@@ -57,7 +60,7 @@ const SkillsSection = () => {
             </h2>
             <div className="w-20 h-1 bg-accent mx-auto mb-4"></div>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Technologies, tools, and concepts from my projects and developer journey. Click on a skill to see matching projects!
+              Technologies, tools, and concepts from my projects and developer journey. Highlighted skills link to the projects that use them.
             </p>
           </div>
 
@@ -74,15 +77,26 @@ const SkillsSection = () => {
                     <h4 className="font-semibold text-primary">{cat.title}</h4>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {cat.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        onClick={() => handleSkillClick(skill)}
-                        className="px-3 py-1.5 bg-background rounded-full text-sm text-muted-foreground border border-border/60 hover:border-accent/40 hover:text-accent hover:bg-accent/5 cursor-pointer select-none transition-all duration-300"
-                      >
-                        {skill}
-                      </span>
-                    ))}
+                    {cat.skills.map((skill) =>
+                      hasMatchingProject(skill) ? (
+                        <button
+                          key={skill}
+                          type="button"
+                          onClick={() => handleSkillClick(skill)}
+                          aria-label={`Show projects that use ${skill}`}
+                          className="px-3 py-1.5 bg-background rounded-full text-sm text-foreground border border-accent/40 hover:border-accent hover:text-accent hover:bg-accent/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer select-none transition-all duration-300"
+                        >
+                          {skill}
+                        </button>
+                      ) : (
+                        <span
+                          key={skill}
+                          className="px-3 py-1.5 bg-background rounded-full text-sm text-muted-foreground border border-border/60 select-none"
+                        >
+                          {skill}
+                        </span>
+                      )
+                    )}
                   </div>
                 </CardContent>
               </Card>
