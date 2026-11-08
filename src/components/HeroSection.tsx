@@ -370,7 +370,7 @@ const HeroSection = () => {
               <Github size={22} />
             </a>
             <a
-              href="https://www.linkedin.com/in/sai-santhosh-07603828b"
+              href="https://www.linkedin.com/in/sai-santhosh-gaddam"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile"

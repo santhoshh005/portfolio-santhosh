@@ -31,5 +31,5 @@ npm run dev
 
 - Email: saisanthosh05012006@gmail.com
 - Mobile: +91 7569532243
-- LinkedIn: https://www.linkedin.com/in/sai-santhosh-07603828b
+- LinkedIn: https://www.linkedin.com/in/sai-santhosh-gaddam
 - GitHub: https://github.com/santhoshh005

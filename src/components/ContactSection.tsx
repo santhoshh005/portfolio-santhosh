@@ -268,8 +268,8 @@ Sent At: ${formattedTime}`;
                   <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-1">LinkedIn</p>
                   <div className="flex items-center gap-2.5 min-w-0 pt-1">
                     <Linkedin className="w-4 h-4 text-accent shrink-0" />
-                    <a className="font-medium text-primary hover:text-accent transition-colors break-all text-sm sm:text-base" href="https://www.linkedin.com/in/sai-santhosh-07603828b" target="_blank" rel="noopener noreferrer">
-                      linkedin.com/in/sai-santhosh-07603828b
+                    <a className="font-medium text-primary hover:text-accent transition-colors break-all text-sm sm:text-base" href="https://www.linkedin.com/in/sai-santhosh-gaddam" target="_blank" rel="noopener noreferrer">
+                      linkedin.com/in/sai-santhosh-gaddam
                     </a>
                   </div>
                 </div>
@@ -288,7 +288,7 @@ Sent At: ${formattedTime}`;
                     <Github className="w-5 h-5" />
                   </a>
                   <a
-                    href="https://www.linkedin.com/in/sai-santhosh-07603828b"
+                    href="https://www.linkedin.com/in/sai-santhosh-gaddam"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LinkedIn"

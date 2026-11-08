@@ -22,7 +22,7 @@ const Footer = () => {
             <a href={`tel:${phone.replace(/\s+/g, '')}`} className="hover:text-primary-foreground transition-colors">
               {phone}
             </a>
-            <a href="https://www.linkedin.com/in/sai-santhosh-07603828b" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground transition-colors">
+            <a href="https://www.linkedin.com/in/sai-santhosh-gaddam" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground transition-colors">
               LinkedIn
             </a>
             <a href="https://github.com/santhoshh005" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground transition-colors">
